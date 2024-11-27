@@ -1,0 +1,40 @@
+.navbar {
+  width: 100%;
+  position: relative;
+  margin: 0;
+  padding: 10px 20px;
+  background-color: #489e6d;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar nav {
+  display: flex;
+  gap: 20px;
+}
+.navbar .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 14px;
+}
+
+.navbar nav a.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.navbar .user-email {
+  margin-right: 10px;
+}
+
+.bbb {
+  font-size: large;
+}

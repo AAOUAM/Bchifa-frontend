@@ -1,0 +1,26 @@
+footer {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+}
+
+footer h5 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+footer p {
+  margin: 0;
+}
+
+
+footer hr {
+  margin: 20px auto;
+  width: 80%;
+  border-top: 1px solid #ffffff;
+}
+
+footer .container {
+  max-width: 800px;
+}
