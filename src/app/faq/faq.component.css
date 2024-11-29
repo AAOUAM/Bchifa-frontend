@@ -1,0 +1,19 @@
+.special-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #489e6d;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.special-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: #489e6d;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
