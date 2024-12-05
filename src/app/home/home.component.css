@@ -1,6 +1,6 @@
 .header {
   text-align: center;
-  background-color: #489e6d;
+  background-color: #0078d7;
   color: white;
 
 }
@@ -12,7 +12,8 @@
 
 
 .imgdoc{
-  max-width: 400px ;
+  max-width: 590px ;
+  margin-left: -140px;
 }
 
 h1 {
@@ -22,13 +23,13 @@ h1 {
 }
 .handwritten{
   font-family: 'Pacifico', cursive;
-  color : #210067;
+  color : white;
 }
 
 .special-title {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #489e6d;
+  color: #0078d7;
   text-transform: uppercase;
   letter-spacing: 2px;
   position: relative;
@@ -40,7 +41,7 @@ h1 {
   display: block;
   width: 80px;
   height: 4px;
-  background-color: #489e6d;
+  background-color: #0078d7;
   margin: 10px auto 0;
   border-radius: 2px;
 }

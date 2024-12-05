@@ -1,1 +1,60 @@
+<div class="p-4 header">
+  <app-searchbar></app-searchbar>
+</div>
+
+<div class="filter-container shadow-sm  p-3">
+  <button (click)="toggleDropdown('price')" class="filter-btn ms-5 "><i class="bi bi-currency-dollar"></i> Prix</button>
+  <div *ngIf="dropdowns.price" class="dropdown">
+    <label *ngFor="let price of priceOptions">
+      <input type="checkbox" [value]="price" (change)="updateFilter('price', price)" />
+      {{ price }}
+    </label>
+  </div>
+
+  <!-- Bouton de filtrage pour la disponibilité -->
+  <button (click)="toggleDropdown('availability')" class="filter-btn"><i class="bi bi-calendar"></i> Disponibilité</button>
+  <div *ngIf="dropdowns.availability" class="dropdown">
+    <label *ngFor="let availability of availabilityOptions">
+      <input type="checkbox" [value]="availability" (change)="updateFilter('availability', availability)" />
+      {{ availability }}
+    </label>
+  </div>
+
+  <!-- Bouton de filtrage pour le genre de consultation -->
+  <button (click)="toggleDropdown('consultationType')" class="filter-btn">Genre de Consultation</button>
+  <div *ngIf="dropdowns.consultationType" class="dropdown">
+    <label *ngFor="let type of consultationTypeOptions">
+      <input type="checkbox" [value]="type" (change)="updateFilter('consultationType', type)" />
+      {{ type }}
+    </label>
+  </div>
+
+  <!-- Bouton pour plus de filtres -->
+  <button (click)="toggleDropdown('moreFilters')" class="filter-btn"><i class="bi bi-funnel"></i> Plus de filtres</button>
+  <div *ngIf="dropdowns.moreFilters" class="dropdown">
+    <label *ngFor="let filter of moreFiltersOptions">
+      <input type="checkbox" [value]="filter" (change)="updateFilter('moreFilters', filter)" />
+      {{ filter }}
+    </label>
+  </div>
+</div>
+
+
+<!-- Section Résultats et Carte -->
+<div class="container mt-3">
+  <p><strong>{{nombrederesultats}} Résultas obtenus</strong></p>
+  <div class="row">
+    <!-- Colonne des résultats -->
+    <div class="col-md-8">
+      <div class="mb-3" *ngFor="let docteur of docteurs">
+        <app-docteur-card [docteur]="docteur"></app-docteur-card>
+      </div>
+    </div>
+
+    <!-- Colonne de la carte -->
+    <div class="col-md-4">
+      <app-map [locations]="docteurs"></app-map>
+    </div>
+  </div>
+</div>
 

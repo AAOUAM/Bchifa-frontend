@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import {SearchbarComponent} from '../searchbar/searchbar.component';
-import {NgForOf, NgOptimizedImage} from '@angular/common';
+import {NgForOf} from '@angular/common';
 import {SpecialiteesCardComponent} from '../specialitees-card/specialitees-card.component';
 import {FaqComponent} from '../faq/faq.component';
+import {SpecialitesMedicales} from '../../Models/SpecialitesMedicales';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     SearchbarComponent,
-    NgOptimizedImage,
     SpecialiteesCardComponent,
     NgForOf,
     FaqComponent
@@ -18,13 +18,15 @@ import {FaqComponent} from '../faq/faq.component';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  specialites = [
-    { nom: 'Cardiologie', icon: 'bi-heart-pulse' },
-    { nom: 'Ophtalmologie', icon: 'bi-eye' },
-    { nom: 'Pneumologie', icon: 'bi-lungs' },
-    { nom: 'Pneumologie', icon: 'bi-lungs' },
-    { nom: 'Pneumologie', icon: 'bi-lungs' },
-    { nom: 'Pneumologie', icon: 'bi-lungs' },
-    // Ajoutez d'autres spécialités ici
+   specialites = [
+     { nom: SpecialitesMedicales.MEDECINE_URGENCE, icon: 'fas fa-first-aid' },
+     { nom: SpecialitesMedicales.CARDIOLOGIE, icon: 'bi bi-heart-pulse' },
+    { nom: SpecialitesMedicales.PNEUMOLOGIE, icon: 'bi bi-lungs' },
+    { nom: SpecialitesMedicales.DERMATOLOGIE, icon: 'bi bi-person-bounding-box' },
+    { nom: SpecialitesMedicales.PSYCHIATRIE, icon: 'bi bi-emoji-dizzy' },
+    { nom: SpecialitesMedicales.CHIRURGIE_OPHTALMOLOGIQUE, icon: 'bi bi-eye' },
+    { nom: SpecialitesMedicales.CHIRURGIE_ORL, icon: 'bi bi-ear' },
+    { nom: SpecialitesMedicales.RADIOLOGIE, icon: 'bi bi-images' },
   ];
+
 }
