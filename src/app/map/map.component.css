@@ -1,4 +1,4 @@
 .map {
-  height: 400px;
-  width: 100%;
+  height: 600px;  /* Increase the height for a longer map */
+  width: 100%;    /* Keep it responsive to the width of the container */
 }

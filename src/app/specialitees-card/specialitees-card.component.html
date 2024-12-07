@@ -1,7 +1,13 @@
 <div class="card shadow-sm text-center h-100">
     <div class="card-body">
-      <i [class]="specialite.icon + ' display-4 '"  [style.color]="'#0078d7'"></i>
-      <p class="card-text mt-3"><strong>{{ specialite.nom }}</strong></p>
+      <i *ngIf="specialite.nom === SpecialitesMedicales.MEDECINE_URGENCE"
+         [class]="specialite.icon + ' display-4 '" [style.color]="'red'"></i>
+      <i *ngIf="specialite.nom != SpecialitesMedicales.MEDECINE_URGENCE"
+         [class]="specialite.icon + ' display-4 '"  [style.color]="'#0078d7'"></i>
+      <p *ngIf="specialite.nom === SpecialitesMedicales.MEDECINE_URGENCE"
+         class="card-text mt-3 " [style.color]="'red'"><strong>{{ specialite.nom }}</strong></p>
+      <p *ngIf="specialite.nom != SpecialitesMedicales.MEDECINE_URGENCE"
+         class="card-text mt-3 " [style.color]="'#0078d7'"><strong>{{ specialite.nom }}</strong></p>
     </div>
 </div>
 

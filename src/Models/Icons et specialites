@@ -44,3 +44,9 @@ const specialites = [
   { nom: SpecialitesMedicales.MEDECINE_TROPICALE, icon: 'bi-sun' },
   { nom: SpecialitesMedicales.EPIDEMIOLOGIE, icon: 'bi-graph-up' },
 ];
+
+
+
+Documentation :
+https://docs.maptiler.com/sdk-js/?key=7BuANVT83j0hWrwFxS2m&mapId=14420d1d-5ff4-4b71-bda1-958e4178fc41&_gl=1*hfvxkx*_ga*MjA1MDMwODE1NS4xNzMzNTY3MDQ0*_ga_K4SXYBF4HT*MTczMzU2NzA0My4xLjEuMTczMzU3MDg0NC4wLjAuMA..
+https://docs.maptiler.com/angular/?key=7BuANVT83j0hWrwFxS2m&mapId=14420d1d-5ff4-4b71-bda1-958e4178fc41&_gl=1*kwfp8h*_ga*MjA1MDMwODE1NS4xNzMzNTY3MDQ0*_ga_K4SXYBF4HT*MTczMzU2NzA0My4xLjEuMTczMzU3MDUyMi4wLjAuMA..

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import {SearchbarComponent} from '../searchbar/searchbar.component';
-import {NgForOf, NgIf} from '@angular/common';
-import {DocteurCardComponent} from '../docteur-card/docteur-card.component';
-import {MapComponent} from '../map/map.component';
+import {Component, OnInit} from '@angular/core';
+import { SearchbarComponent } from '../searchbar/searchbar.component';
+import { NgForOf} from '@angular/common';
+import { DocteurCardComponent } from '../docteur-card/docteur-card.component';
+import { MapComponent } from '../map/map.component';
+import {FiltreBarComponent} from '../filtre-bar/filtre-bar.component';
 
 @Component({
   selector: 'app-listdocteurs',
@@ -10,14 +11,14 @@ import {MapComponent} from '../map/map.component';
   imports: [
     SearchbarComponent,
     NgForOf,
-    NgIf,
     DocteurCardComponent,
-    MapComponent
+    MapComponent,
+    FiltreBarComponent
   ],
   templateUrl: './listdocteurs.component.html',
-  styleUrl: './listdocteurs.component.css'
+  styleUrls: ['./listdocteurs.component.css']
 })
-export class ListdocteursComponent {
+export class ListdocteursComponent implements OnInit {
   docteurs = [
     {
       INPE: 10101,
@@ -84,46 +85,117 @@ export class ListdocteursComponent {
       latitude: 35.759465,
       longitude: -5.833954,
     },
+    {
+      INPE: 50505,
+      nom: 'Dr Rachid Belhaj',
+      description: 'Dentiste spécialisé en soins dentaires et esthétique.',
+      specialite: 'Dentiste',
+      telephone: '+212 6 65 00 00 00',
+      email: 'rachid.belhaj@example.com',
+      image: 'https://via.placeholder.com/100',
+      Adresse: 'Avenue Al Alaouiyine, Tanger',
+      availableDays: ['Lundi', 'Mercredi', 'Samedi'],
+      latitude: 35.759465,
+      longitude: -5.833954,
+    },
+    {
+      INPE: 50505,
+      nom: 'Dr Rachid Belhaj',
+      description: 'Dentiste spécialisé en soins dentaires et esthétique.',
+      specialite: 'Dentiste',
+      telephone: '+212 6 65 00 00 00',
+      email: 'rachid.belhaj@example.com',
+      image: 'https://via.placeholder.com/100',
+      Adresse: 'Avenue Al Alaouiyine, Tanger',
+      availableDays: ['Lundi', 'Mercredi', 'Samedi'],
+      latitude: 35.759465,
+      longitude: -5.833954,
+    },
+    {
+      INPE: 50505,
+      nom: 'Dr Rachid Belhaj',
+      description: 'Dentiste spécialisé en soins dentaires et esthétique.',
+      specialite: 'Dentiste',
+      telephone: '+212 6 65 00 00 00',
+      email: 'rachid.belhaj@example.com',
+      image: 'https://via.placeholder.com/100',
+      Adresse: 'Avenue Al Alaouiyine, Tanger',
+      availableDays: ['Lundi', 'Mercredi', 'Samedi'],
+      latitude: 35.759465,
+      longitude: -5.833954,
+    },
+    {
+      INPE: 50505,
+      nom: 'Dr Rachid Belhaj',
+      description: 'Dentiste spécialisé en soins dentaires et esthétique.',
+      specialite: 'Dentiste',
+      telephone: '+212 6 65 00 00 00',
+      email: 'rachid.belhaj@example.com',
+      image: 'https://via.placeholder.com/100',
+      Adresse: 'Avenue Al Alaouiyine, Tanger',
+      availableDays: ['Lundi', 'Mercredi', 'Samedi'],
+      latitude: 35.759465,
+      longitude: -5.833954,
+    },
   ];
 
-  nombrederesultats : number = this.docteurs.length ;
+  nombrederesultats: number = this.docteurs.length;
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  paginatedDocteurs: any[] = [];
+
+  ngOnInit(): void {
+    this.paginateCards();
+  }
+
+  applyFilters(docteurs: any[]): any[] {
+    let filtered = docteurs;
+
+    for (let filterType in this.selectedFilters) {
+      const filterValues = this.selectedFilters[filterType];
+      if (filterValues && filterValues.length > 0) {
+        filtered = filtered.filter((docteur: any) =>
+          filterValues.includes(docteur[filterType])
+        );
+      }
+    }
+    return filtered;
+  }
 
 
-  dropdowns = {
-    price: false,
-    availability: false,
-    consultationType: false,
-    moreFilters: false,
-  };
+  paginateCards(): void {
+    let filteredDocteurs = this.applyFilters(this.docteurs);
 
-  // Options pour chaque filtre
-  priceOptions = ['< 50$', '50$ - 100$', '> 100$'];
-  availabilityOptions = ['Disponible maintenant', 'Aujourd\'hui', 'Cette semaine'];
-  consultationTypeOptions = ['Physique', 'En ligne'];
-  moreFiltersOptions = ['Spécialité', 'Langue parlée', 'Note'];
+    // Pagination logic
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedDocteurs = filteredDocteurs.slice(startIndex, endIndex);
+    this.nombrederesultats = filteredDocteurs.length;
+  }
 
-  // Filtre sélectionné
   selectedFilters: any = {};
 
-  // Afficher ou cacher une liste déroulante
-  toggleDropdown(filter: string) {
-    this.dropdowns["moreFilters"] = !this.dropdowns["moreFilters"];
+  onFiltersChanged(filters: any): void {
+    this.selectedFilters = filters;
+    this.paginateCards();
   }
 
-  // Mettre à jour les filtres sélectionnés
-  updateFilter(filterType: string, value: string) {
-    if (!this.selectedFilters[filterType]) {
-      this.selectedFilters[filterType] = [];
-    }
 
-    // Ajouter ou retirer la valeur
-    const index = this.selectedFilters[filterType].indexOf(value);
-    if (index > -1) {
-      this.selectedFilters[filterType].splice(index, 1);
-    } else {
-      this.selectedFilters[filterType].push(value);
+  // Navigate to the next page
+  nextPage(): void {
+    if (this.currentPage * this.itemsPerPage < this.docteurs.length) {
+      this.currentPage++;
+      this.paginateCards();
     }
-
-    console.log(this.selectedFilters); // Debug des filtres sélectionnés
   }
+
+  // Navigate to the previous page
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.paginateCards();
+    }
+  }
+
+
 }

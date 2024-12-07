@@ -1,44 +1,56 @@
-import { Component, Input, OnInit } from '@angular/core';
-import * as L from 'leaflet'; // Si vous utilisez Leaflet
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, Input } from '@angular/core';
+import { Map, MapStyle, Marker, config } from '@maptiler/sdk'; // MapTiler SDK imports
+import '@maptiler/sdk/dist/maptiler-sdk.css';
+import {Popup} from 'leaflet'; // CSS for MapTiler SDK
 
 @Component({
   selector: 'app-map',
-  standalone: true,
-  imports: [],
   templateUrl: './map.component.html',
-  styleUrl: './map.component.css'
+  standalone: true,
+  styleUrls: ['./map.component.css'] // Ensure this file has relevant styles
 })
+export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
+  @Input() locations: any[] = []; // List of doctors or locations to display as markers
+  private map: Map | undefined;
 
-export class MapComponent implements OnInit {
-  @Input() locations: any[] = []; // Liste des docteurs ou emplacements
-
-  private map: any;
-
+  @ViewChild('mapContainer', { static: true })
+  private mapContainer!: ElementRef<HTMLElement>;
 
   ngOnInit(): void {
-    this.initializeMap();
+    config.apiKey = '7BuANVT83j0hWrwFxS2m';
+  }
 
-    // Ajouter des marqueurs si des emplacements sont fournis
-    if (this.locations) {
-      this.addMarkers(this.locations);
+  ngAfterViewInit(): void {
+    this.initializeMap();
+    this.addMarkers(this.locations);
+  }
+
+  ngOnDestroy(): void {
+    if (this.map) {
+      this.map.remove();
     }
   }
 
-  initializeMap(): void {
-    this.map = L.map('map-container').setView([31.7917, -7.0926], 6); // Coordonnées pour le Maroc
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'}).addTo(this.map);
-    
+  private initializeMap(): void {
+    // Initialize the MapTiler map
+    this.map = new Map({
+      container: this.mapContainer.nativeElement, // DOM element for the map
+      style: "14420d1d-5ff4-4b71-bda1-958e4178fc41", // My personnal style
+      center: [-7.0926, 31.7917], // Center the map on Morocco
+      zoom: 4, // Zoom level to fit the whole country (you may need to adjust this value)
+    });
   }
 
-  addMarkers(locations: any[]): void {
-    locations.forEach(location => {
-      const { latitude, longitude, name } = location;
-      if (latitude && longitude) {
-        L.marker([latitude, longitude])
-          .addTo(this.map)
-          .bindPopup(name);
-      }
-    });
+  private addMarkers(locations: any[]): void {
+    if (this.map && locations.length > 0) {
+      locations.forEach(location => {
+        const { latitude, longitude, name } = location;
+        if (latitude && longitude) {
+          new Marker({ color: 'blue' }) // Create a red marker
+            .setLngLat([longitude, latitude])// Set marker position
+            .addTo(this.map); // Add the marker to the map
+        }
+      });
+    }
   }
 }

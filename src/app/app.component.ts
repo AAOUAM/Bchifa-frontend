@@ -4,11 +4,12 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {FooterComponent} from './footer/footer.component';
 import {HomeComponent} from './home/home.component';
 import {ListdocteursComponent} from './listdocteurs/listdocteurs.component';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, FooterComponent, HomeComponent, ListdocteursComponent],
+  imports: [RouterOutlet, NavbarComponent, FooterComponent, HomeComponent, ListdocteursComponent ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -1,0 +1,39 @@
+.filter-container {
+  display: flex;
+  gap: 20px;
+
+}
+
+.filter-btn {
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  border: 1px solid black;
+  padding: 5px 10px;
+}
+
+.filter-btn:hover {
+  background-color: gray;
+}
+
+.dropdown {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.dropdown label {
+  display: block;
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.dropdown input {
+  margin-right: 8px;
+}

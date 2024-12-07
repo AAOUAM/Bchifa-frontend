@@ -18,6 +18,7 @@ export enum SpecialitesMedicales {
   HEMATOLOGIE = "Hématologie",
   INFECTIOLOGIE = "Infectiologie",
   MEDECINE_PHYSIQUE_REEDUCATION = "Médecine Physique et Réadaptation",
+  OPHTALMOLOGUE="Ophtalmologue" ,
 
   // Spécialités chirurgicales
   CHIRURGIE_GENERALE = "Chirurgie Générale",
