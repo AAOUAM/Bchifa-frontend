@@ -1,4 +1,5 @@
 import {SpecialitesMedicales} from "./SpecialitesMedicales";
+import {AvailableDay} from './AvailableDay';
 
 export class Docteur {
   INPE!: number;
@@ -9,9 +10,10 @@ export class Docteur {
   email!: string;
   image!: string;
   Adresse!: string;
-  availableDays!: string[];
+  availableDays!: String[];
   latitude!: number;
   longitude!: number;
+  avis!:number ;
 
   constructor(
     INPE: number,
@@ -22,9 +24,10 @@ export class Docteur {
     email: string,
     image: string,
     Adresse: string,
-    availableDays: string[],
+    availableDays: String[],
     latitude: number,
-    longitude: number
+    longitude: number,
+    avis : number,
   ) {
     this.INPE = INPE;
     this.nom = nom;
@@ -37,5 +40,6 @@ export class Docteur {
     this.availableDays = availableDays;
     this.latitude = latitude;
     this.longitude = longitude;
+    this.avis = avis;
   }
 }

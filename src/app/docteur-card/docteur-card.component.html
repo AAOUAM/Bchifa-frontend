@@ -11,9 +11,10 @@
 
     <!-- Informations du docteur -->
     <div class="flex-grow-1  ">
-      <h5 class="card-title"><i class="bi bi-person-vcard-fill"></i> {{ docteur.nom }}</h5>
-      <p class="card-title"><strong> <i class="bi bi-geo-alt-fill"></i> Adresse :</strong>{{ docteur.Adresse }}</p>
-      <p class="card-title"><strong><i class="bi bi-bandaid-fill"></i> Spécialité :</strong> {{ docteur.specialite }}</p>
+      <h5 class="card-title"><i class="bi bi-person-vcard-fill"></i> <strong> {{ docteur.nom }}</strong></h5>
+      <p class="card-title"><strong> <i class="bi bi-geo-alt-fill"></i> Adresse : </strong>{{ docteur.Adresse }}</p>
+      <p class="card-title"><strong><i class="bi bi-bandaid-fill"></i> Spécialité : </strong> {{ docteur.specialite }}</p>
+      <p class="card-title"><strong><i class="bi bi-star-fill"></i> Avis : </strong> {{ docteur.avis }}/5</p>
     </div>
   </div>
 
@@ -29,8 +30,8 @@
     </div>
   </div>
 
-  <!-- Bouton pour prendre rendez-vous -->
+
   <div class="mt-3 text-center">
-    <button class="btn btn-primary" (click)="bookAppointment()">Prendre Rendez-vous</button>
+    <button class="btn btn-primary shadow-sm" (click)="bookAppointment()"><strong>PRENDRE RENDEZ-VOUS</strong></button>
   </div>
 </div>

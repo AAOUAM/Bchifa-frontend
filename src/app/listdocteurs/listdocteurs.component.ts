@@ -32,6 +32,7 @@ export class ListdocteursComponent implements OnInit {
       availableDays: ['Lundi', 'Mardi', 'Jeudi'],
       latitude: 34.020882,
       longitude: -6.841650,
+      avis : 4.2 ,
     },
     {
       INPE: 20202,
@@ -45,6 +46,7 @@ export class ListdocteursComponent implements OnInit {
       availableDays: ['Mardi', 'Mercredi', 'Vendredi'],
       latitude: 33.589886,
       longitude: -7.603869,
+      avis : 2 ,
     },
     {
       INPE: 30303,
@@ -58,6 +60,7 @@ export class ListdocteursComponent implements OnInit {
       availableDays: ['Lundi', 'Jeudi', 'Samedi'],
       latitude: 31.630000,
       longitude: -8.008889,
+      avis : 5 ,
     },
     {
       INPE: 40404,
@@ -71,6 +74,7 @@ export class ListdocteursComponent implements OnInit {
       availableDays: ['Mardi', 'Vendredi', 'Samedi'],
       latitude: 34.033333,
       longitude: -4.999792,
+      avis : 4.2 ,
     },
     {
       INPE: 50505,
@@ -84,6 +88,7 @@ export class ListdocteursComponent implements OnInit {
       availableDays: ['Lundi', 'Mercredi', 'Samedi'],
       latitude: 35.759465,
       longitude: -5.833954,
+      avis : 4.2 ,
     },
     {
       INPE: 50505,
@@ -97,6 +102,7 @@ export class ListdocteursComponent implements OnInit {
       availableDays: ['Lundi', 'Mercredi', 'Samedi'],
       latitude: 35.759465,
       longitude: -5.833954,
+      avis : 4.2 ,
     },
     {
       INPE: 50505,
@@ -110,6 +116,7 @@ export class ListdocteursComponent implements OnInit {
       availableDays: ['Lundi', 'Mercredi', 'Samedi'],
       latitude: 35.759465,
       longitude: -5.833954,
+      avis : 4.2 ,
     },
     {
       INPE: 50505,
@@ -123,6 +130,7 @@ export class ListdocteursComponent implements OnInit {
       availableDays: ['Lundi', 'Mercredi', 'Samedi'],
       latitude: 35.759465,
       longitude: -5.833954,
+      avis : 4.2 ,
     },
     {
       INPE: 50505,
@@ -136,6 +144,7 @@ export class ListdocteursComponent implements OnInit {
       availableDays: ['Lundi', 'Mercredi', 'Samedi'],
       latitude: 35.759465,
       longitude: -5.833954,
+      avis : 4.2 ,
     },
   ];
 
