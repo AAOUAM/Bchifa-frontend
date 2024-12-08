@@ -12,10 +12,10 @@
 
 .fixed-map {
   position: sticky;
-  top: 20px; /* Distance entre le haut de la fenêtre et la carte */
-  z-index: 10; /* Assurez-vous que la carte reste au-dessus des autres éléments si nécessaire */
-  height: calc(100vh - 40px); /* Taille adaptée à la hauteur de l'écran */
-  overflow: hidden; /* Évite le débordement */
+  top: 20px;
+  z-index: 10;
+  height: calc(100vh - 40px);
+  overflow: hidden;
 }
 
 

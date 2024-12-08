@@ -1,39 +1,21 @@
 .filter-container {
   display: flex;
-  gap: 20px;
-
+  align-items: center;
+  gap: 1rem; /* Espacement horizontal entre les filtres */
+  flex-wrap: wrap; /* Adaptation sur petits écrans */
 }
 
-.filter-btn {
-  background-color: white;
-  color: black;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  border: 1px solid black;
-  padding: 5px 10px;
+.filter-container .btn-group {
+  min-width: 200px; /* Largeur minimale pour une uniformité visuelle */
 }
 
-.filter-btn:hover {
-  background-color: gray;
+.btn-group .dropdown-menu {
+  max-height: 200px; /* Limite la hauteur des longues listes */
+  overflow-y: auto; /* Ajoute un défilement vertical */
 }
 
-.dropdown {
-  position: absolute;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 5px;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.dropdown label {
-  display: block;
-  margin: 5px 0;
-  font-size: 14px;
-}
-
-.dropdown input {
-  margin-right: 8px;
+.btn-group .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacement entre la case à cocher et le texte */
 }

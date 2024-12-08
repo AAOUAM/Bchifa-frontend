@@ -3,14 +3,18 @@
   <app-searchbar></app-searchbar>
 </div>
 
-<app-filtre-bar (filtersChanged)="onFiltersChanged($event)"></app-filtre-bar>
+<div>
+  <app-filtre-bar (filtersChanged)="onFiltersChanged($event)"></app-filtre-bar>
+</div>
+
 
 
 <div class="ms-5 me-5 p-2 mt-3">
   <h5><strong><i class="bi bi-list mb-4"></i> {{ nombrederesultats }} Résultats obtenus  </strong></h5>
-  <div class="row mt-4">
 
+  <div class="row mt-4">
     <div class="col-md-8">
+
       <div class="mb-3" *ngFor="let docteur of paginatedDocteurs">
         <app-docteur-card [docteur]="docteur"></app-docteur-card>
       </div>
@@ -19,12 +23,13 @@
         <button (click)="prevPage()" [disabled]="currentPage === 1" class="btn btn-secondary">Précédent</button>
         <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= nombrederesultats" class="btn btn-secondary">Suivant</button>
       </div>
-    </div>
 
+    </div>
 
     <div class="col-md-4 fixed-map">
       <app-map [locations]="paginatedDocteurs"></app-map>
     </div>
+
   </div>
 
 
