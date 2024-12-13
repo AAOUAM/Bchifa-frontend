@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
+import {NgIf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Note} from '../Modules/Note';
 
