@@ -1,0 +1,60 @@
+<div class="screen">
+
+
+
+  <div class="video-call-container">
+    <!-- Main Video -->
+    <div class="main-video">
+      <video id="localVideo" autoplay muted playsinline ></video>
+    </div>
+
+    <!-- Draggable Small Video -->
+    <div
+      class="small-video"
+      id="remoteVideoCard"
+      draggable="true"
+      (click)="swapVideos()"
+      (dragstart)="onDragStart($event)"
+      (dragend)="onDragEnd($event)"
+    >
+      <video id="remoteVideo" autoplay muted playsinline ></video>
+
+    </div>
+
+    <!-- Control Buttons -->
+    <div class="control-buttons">
+      <button class="btn btn-danger" (click)="endCall()">
+        <i class="bi bi-telephone-x-fill"></i>
+      </button>
+
+
+
+      <button class="btn btn-secondary" (click)="toggleMicrophone()" *ngIf="isMicrophoneOn">
+        <i class="bi bi-mic"></i>
+      </button>
+
+      <button class="btn btn-secondary" (click)="makeOnMicrophone()" *ngIf="!isMicrophoneOn">
+        <i class="bi bi-mic-mute"></i>
+      </button>
+
+
+
+      <button class="btn btn-secondary" (click)="toggleCamera()" *ngIf="isCameraOn">
+        <i class="bi bi-camera-video"></i>
+      </button>
+
+      <button class="btn btn-secondary" (click)="makeOnCamera()" *ngIf="!isCameraOn">
+        <i class="bi bi-camera-video-off"></i>
+      </button>
+
+
+
+
+      <button class="btn btn-secondary" (click)="adjustVolume()">
+        <i class="bi bi-volume-up"></i>
+      </button>
+    </div>
+  </div>
+
+
+</div>
