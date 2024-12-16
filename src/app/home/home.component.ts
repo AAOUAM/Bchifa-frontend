@@ -20,13 +20,14 @@ import {SpecialitesMedicales} from '../../Models/SpecialitesMedicales';
 export class HomeComponent {
    specialites = [
      { nom: SpecialitesMedicales.MEDECINE_URGENCE, icon: 'bi bi-exclamation-triangle-fill' },
+     { nom: SpecialitesMedicales.MEDECINE_GENERALISTE, icon: 'bi bi-hospital' },
      { nom: SpecialitesMedicales.CARDIOLOGIE, icon: 'bi bi-heart-pulse' },
     { nom: SpecialitesMedicales.PNEUMOLOGIE, icon: 'bi bi-lungs' },
     { nom: SpecialitesMedicales.DERMATOLOGIE, icon: 'bi bi-person-bounding-box' },
     { nom: SpecialitesMedicales.PSYCHIATRIE, icon: 'bi bi-emoji-dizzy' },
     { nom: SpecialitesMedicales.OPHTALMOLOGUE, icon: 'bi bi-eye' },
     { nom: SpecialitesMedicales.CHIRURGIE_ORL, icon: 'bi bi-ear' },
-    { nom: SpecialitesMedicales.RADIOLOGIE, icon: 'bi bi-images' },
+     { nom: SpecialitesMedicales.DENTISTE, icon: 'bi bi-emoji-smile' },
   ];
 
 }

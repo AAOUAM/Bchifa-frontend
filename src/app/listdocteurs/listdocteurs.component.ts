@@ -4,6 +4,8 @@ import { NgForOf} from '@angular/common';
 import { DocteurCardComponent } from '../docteur-card/docteur-card.component';
 import { MapComponent } from '../map/map.component';
 import {FiltreBarComponent} from '../filtre-bar/filtre-bar.component';
+import {ActivatedRoute} from '@angular/router';
+import {Docteur} from '../../Models/Docteur';
 
 @Component({
   selector: 'app-listdocteurs',
@@ -33,6 +35,9 @@ export class ListdocteursComponent implements OnInit {
       latitude: 34.020882,
       longitude: -6.841650,
       avis : 4.2 ,
+      prixConsultation: 40,
+      GenreConsultation: 'Présentiel',
+      Langue: ['Français', 'Arabe'],
     },
     {
       INPE: 20202,
@@ -47,6 +52,9 @@ export class ListdocteursComponent implements OnInit {
       latitude: 33.589886,
       longitude: -7.603869,
       avis : 2 ,
+      prixConsultation: 40,
+      GenreConsultation: 'Présentiel',
+      Langue: ['Arabe'],
     },
     {
       INPE: 30303,
@@ -61,6 +69,9 @@ export class ListdocteursComponent implements OnInit {
       latitude: 31.630000,
       longitude: -8.008889,
       avis : 5 ,
+      prixConsultation: 40,
+      GenreConsultation: 'Présentiel',
+      Langue: ['Français', 'Arabe'],
     },
     {
       INPE: 40404,
@@ -75,6 +86,9 @@ export class ListdocteursComponent implements OnInit {
       latitude: 34.033333,
       longitude: -4.999792,
       avis : 4.2 ,
+      prixConsultation: 40,
+      GenreConsultation: 'En ligne',
+      Langue: ['Arabe', 'Anglais'],
     },
     {
       INPE: 50505,
@@ -89,6 +103,9 @@ export class ListdocteursComponent implements OnInit {
       latitude: 35.759465,
       longitude: -5.833954,
       avis : 4.2 ,
+      prixConsultation: 400,
+      GenreConsultation: 'En ligne',
+      Langue: ['Arabe', 'Anglais'],
     },
     {
       INPE: 50505,
@@ -103,6 +120,9 @@ export class ListdocteursComponent implements OnInit {
       latitude: 35.759465,
       longitude: -5.833954,
       avis : 4.2 ,
+      prixConsultation: 30,
+      GenreConsultation: 'En ligne',
+      Langue: ['Arabe', 'Anglais'],
     },
     {
       INPE: 50505,
@@ -117,6 +137,9 @@ export class ListdocteursComponent implements OnInit {
       latitude: 35.759465,
       longitude: -5.833954,
       avis : 4.2 ,
+      prixConsultation: 50,
+      GenreConsultation: 'En ligne',
+      Langue: ['Arabe', 'Anglais'],
     },
     {
       INPE: 50505,
@@ -131,6 +154,10 @@ export class ListdocteursComponent implements OnInit {
       latitude: 35.759465,
       longitude: -5.833954,
       avis : 4.2 ,
+      prixConsultation: 40,
+      GenreConsultation: 'En ligne',
+      Langue: ['Anglais'],
+
     },
     {
       INPE: 50505,
@@ -145,31 +172,76 @@ export class ListdocteursComponent implements OnInit {
       latitude: 35.759465,
       longitude: -5.833954,
       avis : 4.2 ,
+      prixConsultation: 100,
+      GenreConsultation: 'Présentiel',
+      Langue: ['Français', 'Arabe'],
     },
   ];
 
-  nombrederesultats: number = this.docteurs.length;
+  nombrederesultats!: number ;
   currentPage: number = 1;
   itemsPerPage: number = 5;
   paginatedDocteurs: any[] = [];
 
-  ngOnInit(): void {
-    this.paginateCards();
+  constructor(private route: ActivatedRoute) {
   }
 
-  applyFilters(docteurs: any[]): any[] {
+  ngOnInit(): void {
+    this.paginateCards();
+    this.route.queryParams.subscribe(params => {
+      const specialite = params['specialite'];
+      if (specialite) {
+        this.paginatedDocteurs = this.docteurs.filter(doc => doc.specialite === specialite);
+      } else {
+        this.paginatedDocteurs = this.docteurs; // Affiche tous les docteurs par défaut
+      }
+    });
+    this.nombrederesultats = this.paginatedDocteurs.length;
+  }
+
+
+  applyFilters(docteurs: Docteur[]){
     let filtered = docteurs;
 
     for (let filterType in this.selectedFilters) {
       const filterValues = this.selectedFilters[filterType];
       if (filterValues && filterValues.length > 0) {
-        filtered = filtered.filter((docteur: any) =>
-          filterValues.includes(docteur[filterType])
-        );
+        switch (filterType) {
+          case 'Langue':
+            // Filtrer par Langues
+            filtered = filtered.filter((docteur) =>
+              filterValues.some((langue: string) => docteur.Langue.includes(langue))
+            );
+            break;
+
+          case 'avis':
+            // Filtrer par Avis (Note)
+            filtered = filtered.filter((docteur) =>
+              filterValues.includes(Math.floor(docteur.avis))
+            );
+            break;
+
+          case 'availableDays':
+            // Filtrer par jours disponibles
+            filtered = filtered.filter((docteur) =>
+              filterValues.some((day: string) => docteur.availableDays.includes(day))
+            );
+            break;
+
+          default:
+            // Filtrage générique (pour prixConsultation, GenreConsultation, etc.)
+            filtered = filtered.filter((docteur) =>
+              filterValues.includes(docteur[filterType as keyof Docteur])
+            );
+            break;
+        }
       }
     }
+
     return filtered;
   }
+
+
 
 
   paginateCards(): void {

@@ -1,4 +1,4 @@
-<div class="navbar d-flex justify-content-between align-items-center p-3 ">
+<div *ngIf="EtatConnectee" class="navbar d-flex justify-content-between align-items-center p-3 ">
   <!-- Logo ou Titre -->
   <nav>
     <a class="navbar-brand fw-bold ms-2" routerLink="/Home">Bchifa</a>
@@ -6,14 +6,33 @@
 
   <!-- Liens de navigation -->
   <nav class="d-flex align-items-center">
-    <a href="#" class="nav-link fw-bold mx-2 d-flex align-items-center">
+    <button href="#" class="nav-link fw-bold mx-2 d-flex align-items-center">
       <i class="bi bi-translate me-1"></i> Fr
-    </a>
-    <a href="#" class="nav-link fw-bold mx-2">Messages</a>
-    <a href="#" class="nav-link fw-bold mx-2">Rendez-vous</a>
-    <a href="#" class="nav-link  fw-bold mx-2">Documents</a>
-    <a href="#" class="nav-link  fw-bold mx-2">
+    </button>
+    <button href="#" class="nav-link fw-bold mx-2">Messages</button>
+    <button href="#" class="nav-link fw-bold mx-2">Rendez-vous</button>
+    <button href="#" class="nav-link  fw-bold mx-2">Documents</button>
+    <button href="#" class="nav-link  fw-bold mx-2">
       <i class="bi bi-person"></i>
-    </a>
+    </button>
   </nav>
 </div>
+
+
+
+<div *ngIf="!EtatConnectee" class="navbar d-flex justify-content-between align-items-center p-3 ">
+  <!-- Logo ou Titre -->
+  <nav>
+    <a class="navbar-brand fw-bold ms-2" routerLink="/Home">Bchifa</a>
+  </nav>
+
+  <!-- Liens de navigation -->
+  <nav class="d-flex align-items-center">
+    <button href="#" class="nav-link fw-bold mx-2 d-flex align-items-center">
+      <i class="bi bi-translate me-1"></i> Fr
+    </button>
+    <button href="#" class="btn btn-outline-light fw-bold mx-2" (click)="Connexion()">Se connecter</button>
+    <button href="#" class="btn btn-outline-light fw-bold mx-2 me-3">S'inscrire</button>
+  </nav>
+</div>
+
