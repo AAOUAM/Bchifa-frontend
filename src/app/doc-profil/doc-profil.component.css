@@ -1,0 +1,181 @@
+/* Global Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Doctor Card */
+.doctor-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 20px auto;
+  overflow: hidden;
+}
+
+/* Header Section */
+.doctor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.doctor-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #007bff;
+  object-fit: cover;
+}
+
+.doctor-info {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.doctor-info h2 {
+  font-size: 22px;
+  color: #007bff;
+  margin: 0;
+}
+
+.specialty {
+  font-size: 16px;
+  color: #333;
+  margin: 5px 0;
+}
+
+.experience {
+  font-size: 14px;
+  color: #666;
+}
+
+.address,
+.tariffs {
+  margin: 10px 0;
+}
+
+.availability-status {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.status-available {
+  color: green;
+  font-weight: bold;
+}
+
+.book-button button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+
+
+/* Slots Section */
+.doctor-slots {
+  padding: 20px;
+}
+
+.slots-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+.doctor-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Style pour les jours */
+.calendar-days {
+  display: flex;
+  justify-content: space-between;
+  background-color: #e0f7fa; /* Bleu ciel */
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.day-tab {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  background-color: #b2ebf2;
+  border-radius: 5px;
+  margin: 0 5px;
+  transition: transform 0.3s, background-color 0.3s;
+  cursor: pointer;
+}
+
+.day-tab:hover {
+  transform: scale(1.05);
+  background-color: #80deea;
+}
+
+/* Style pour les horaires */
+.calendar-hours {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.hour-column {
+  background-color: #e8f5e9; /* Vert clair */
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hour-column h4 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #388e3c; /* Vert foncé */
+}
+
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.time-slot {
+  background-color: #a5d6a7; /* Vert */
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.time-slot:hover {
+  background-color: #66bb6a;
+
+}
+
+
+
+
