@@ -1,4 +1,14 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  OnDestroy,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { Map, MapStyle, Marker, config } from '@maptiler/sdk'; // MapTiler SDK imports
 import '@maptiler/sdk/dist/maptiler-sdk.css';
 import {Popup} from 'leaflet'; // CSS for MapTiler SDK
@@ -9,7 +19,7 @@ import {Popup} from 'leaflet'; // CSS for MapTiler SDK
   standalone: true,
   styleUrls: ['./map.component.css'] // Ensure this file has relevant styles
 })
-export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MapComponent implements OnInit, AfterViewInit, OnDestroy , OnChanges{
   @Input() locations: any[] = []; // List of doctors or locations to display as markers
   private map: Map | undefined;
 
@@ -18,6 +28,16 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     config.apiKey = '7BuANVT83j0hWrwFxS2m';
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['locations']) {
+      this.refreshMap(); // Rafraîchir la carte avec les nouvelles localisations
+    }
+  }
+
+  refreshMap(): void {
+    // Logique pour mettre à jour la carte
+    console.log('Carte mise à jour avec les localisations :', this.locations);
   }
 
   ngAfterViewInit(): void {

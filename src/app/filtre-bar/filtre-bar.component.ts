@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import {NgForOf, NgIf} from '@angular/common';
 
+
 @Component({
   selector: 'app-filtre-bar',
   standalone: true,
@@ -9,20 +10,18 @@ import {NgForOf, NgIf} from '@angular/common';
   styleUrls: ['./filtre-bar.component.css']
 })
 export class FiltreBarComponent {
+  protected readonly toString = toString;
   @Output() filtersChanged = new EventEmitter<any>();
 
-  dropdowns = { price: false, availability: false, consultationType: false, moreFilters: false };
   priceOptions = ['< 50$', '50$ - 100$', '> 100$'];
   availabilityOptions = ['Disponible maintenant', 'Aujourd\'hui', 'Cette semaine'];
   consultationTypeOptions = ['Physique', 'En ligne'];
-  moreFiltersOptions = ['Spécialité', 'Langue parlée', 'Note'];
+  languageOptions = ['Français', 'Anglais', 'Arabe'];
+  ratingOptions = [1, 2, 3, 4, 5];
+
   selectedFilters: any = {};
 
-  toggleDropdown(filter: string) {
-    this.dropdowns[filter] = !this.dropdowns[filter];
-  }
-
-  updateFilter(filterType: string, value: string) {
+  updateFilter(filterType: string, value: string | number) {
     if (!this.selectedFilters[filterType]) {
       this.selectedFilters[filterType] = [];
     }
@@ -34,4 +33,6 @@ export class FiltreBarComponent {
     }
     this.filtersChanged.emit(this.selectedFilters);
   }
+
+
 }

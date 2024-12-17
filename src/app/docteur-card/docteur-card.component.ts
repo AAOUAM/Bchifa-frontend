@@ -1,7 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {Docteur} from '../../Models/Docteur';
-import {NgForOf} from '@angular/common';
+
+import {NgForOf, NgIf} from '@angular/common';
 import {RouterLink} from '@angular/router';
+
 
 @Component({
   selector: 'app-docteur-card',
@@ -9,6 +11,7 @@ import {RouterLink} from '@angular/router';
   imports: [
     NgForOf,
     RouterLink
+    NgIf
   ],
   templateUrl: './docteur-card.component.html',
   styleUrl: './docteur-card.component.css'

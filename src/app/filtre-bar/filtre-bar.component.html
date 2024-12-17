@@ -1,6 +1,6 @@
 <div class="filter-container shadow-sm p-3 d-flex align-items-center gap-3 flex-wrap">
   <!-- Filtre pour le prix -->
-  <div class="dropdown">
+  <div class="dropdown ms-2">
     <button class="btn btn-outline-primary dropdown-toggle" type="button" id="priceDropdown" data-bs-toggle="dropdown" aria-expanded="false">
       <i class="bi bi-currency-dollar"></i> Prix
     </button>
@@ -44,18 +44,34 @@
     </ul>
   </div>
 
-  <!-- Plus de filtres -->
+  <!-- Filtre pour les langues -->
   <div class="dropdown">
-    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="moreFiltersDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="bi bi-funnel"></i> Plus de filtres
+    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-translate"></i> Langues
     </button>
-    <ul class="dropdown-menu" aria-labelledby="moreFiltersDropdown">
-      <li *ngFor="let filter of moreFiltersOptions">
+    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+      <li *ngFor="let language of languageOptions">
         <label class="dropdown-item">
-          <input type="checkbox" [value]="filter" (change)="updateFilter('moreFilters', filter)" />
-          {{ filter }}
+          <input type="checkbox" [value]="language" (change)="updateFilter('language', language)" />
+          {{ language }}
         </label>
       </li>
     </ul>
   </div>
+
+  <!-- Filtre pour les notes -->
+  <div class="dropdown">
+    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="ratingDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-star-fill"></i> Notes
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="ratingDropdown">
+      <li *ngFor="let rating of ratingOptions">
+        <label class="dropdown-item">
+          <input type="checkbox" [value]="rating" (change)="updateFilter('rating', rating.toString())" />
+          {{ rating }} étoiles
+        </label>
+      </li>
+    </ul>
+  </div>
+
 </div>

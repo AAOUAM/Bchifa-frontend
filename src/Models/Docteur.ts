@@ -14,6 +14,9 @@ export class Docteur {
   latitude!: number;
   longitude!: number;
   avis!:number ;
+  prixConsultation!: number;
+  GenreConsultation! : string;
+  Langue! : String[]
 
   constructor(
     INPE: number,
@@ -28,6 +31,11 @@ export class Docteur {
     latitude: number,
     longitude: number,
     avis : number,
+    prixConsultation: number ,
+    GenreConsultation : string ,
+    Langue : string[] ,
+
+
   ) {
     this.INPE = INPE;
     this.nom = nom;
@@ -41,5 +49,8 @@ export class Docteur {
     this.latitude = latitude;
     this.longitude = longitude;
     this.avis = avis;
+    this.prixConsultation = prixConsultation;
+    this.GenreConsultation = GenreConsultation;
+    this.Langue = Langue;
   }
 }
