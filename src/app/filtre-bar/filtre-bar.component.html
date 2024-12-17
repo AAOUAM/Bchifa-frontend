@@ -1,0 +1,77 @@
+<div class="filter-container shadow-sm p-3 d-flex align-items-center gap-3 flex-wrap">
+  <!-- Filtre pour le prix -->
+  <div class="dropdown ms-2">
+    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="priceDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-currency-dollar"></i> Prix
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="priceDropdown">
+      <li *ngFor="let price of priceOptions">
+        <label class="dropdown-item">
+          <input type="checkbox" [value]="price" (change)="updateFilter('price', price)" />
+          {{ price }}
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Filtre pour la disponibilité -->
+  <div class="dropdown">
+    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="availabilityDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-calendar"></i> Disponibilité
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="availabilityDropdown">
+      <li *ngFor="let availability of availabilityOptions">
+        <label class="dropdown-item">
+          <input type="checkbox" [value]="availability" (change)="updateFilter('availability', availability)" />
+          {{ availability }}
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Filtre pour le genre de consultation -->
+  <div class="dropdown">
+    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="consultationTypeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      Genre de Consultation
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="consultationTypeDropdown">
+      <li *ngFor="let type of consultationTypeOptions">
+        <label class="dropdown-item">
+          <input type="checkbox" [value]="type" (change)="updateFilter('consultationType', type)" />
+          {{ type }}
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Filtre pour les langues -->
+  <div class="dropdown">
+    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-translate"></i> Langues
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+      <li *ngFor="let language of languageOptions">
+        <label class="dropdown-item">
+          <input type="checkbox" [value]="language" (change)="updateFilter('language', language)" />
+          {{ language }}
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Filtre pour les notes -->
+  <div class="dropdown">
+    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="ratingDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-star-fill"></i> Notes
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="ratingDropdown">
+      <li *ngFor="let rating of ratingOptions">
+        <label class="dropdown-item">
+          <input type="checkbox" [value]="rating" (change)="updateFilter('rating', rating.toString())" />
+          {{ rating }} étoiles
+        </label>
+      </li>
+    </ul>
+  </div>
+
+</div>

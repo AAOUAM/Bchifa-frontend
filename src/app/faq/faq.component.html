@@ -1,0 +1,34 @@
+<h3 class="text-center my-4 special-title mt-5">Questions fréquentes</h3>
+
+<div class="container my-5">
+  <div class="accordion" id="faqAccordion">
+    <div
+      class="accordion-item mb-4"
+      *ngFor="let item of faqItems; let i = index"
+    >
+      <h2 class="accordion-header" [id]="'heading' + i">
+        <button
+          class="accordion-button"
+          type="button"
+          [attr.data-bs-toggle]="'collapse'"
+          [attr.data-bs-target]="'#collapse' + i"
+          [attr.aria-expanded]="i === 0 ? 'true' : 'false'"
+          [attr.aria-controls]="'collapse' + i"
+          [class.collapsed]="i !== 0"
+        >
+          + {{ item.question }}
+        </button>
+      </h2>
+      <div
+        [id]="'collapse' + i"
+        class="accordion-collapse collapse"
+        [class.show]="i === 0"
+        [attr.aria-labelledby]="'heading' + i"
+        data-bs-parent="#faqAccordion"
+      >
+        <div class="accordion-body">{{ item.answer }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+

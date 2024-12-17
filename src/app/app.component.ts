@@ -7,12 +7,13 @@ import {InfoComponent} from './info/info.component';
 import {DocumentsComponent} from './documents/documents.component';
 import {FormsModule} from '@angular/forms';
 import {VediocallComponent} from './vediocall/vediocall.component';
-
+import {ListdocteursComponent} from './listdocteurs/listdocteurs.component';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, FooterComponent, HomeComponent, InfoComponent, DocumentsComponent, FormsModule, VediocallComponent],
+  imports: [RouterOutlet, NavbarComponent, FooterComponent, HomeComponent, InfoComponent, DocumentsComponent, FormsModule, VediocallComponent, ListdocteursComponent ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

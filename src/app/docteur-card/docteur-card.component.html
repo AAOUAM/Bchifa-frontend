@@ -1,0 +1,43 @@
+<div class="doctor-profile-container p-1">
+  <div class="card p-3 shadow-lg">
+    <div class="d-flex flex-column flex-md-row align-items-center">
+      <!-- Photo du docteur -->
+      <div class="me-md-3 mb-3 mb-md-0 text-center">
+        <img
+          [src]="docteur.image"
+          class="img-fluid rounded-circle"
+          [alt]="'Photo de ' + docteur.nom"
+          style="width: 100px; height: 100px; object-fit: cover;">
+      </div>
+
+      <!-- Informations du docteur -->
+      <div class="flex-grow-1">
+        <h5 class="card-title"><i class="bi bi-person-vcard-fill"></i> <strong> {{ docteur.nom }}</strong></h5>
+        <p class="card-text"><strong><i class="bi bi-geo-alt-fill"></i> Adresse : </strong> {{ docteur.Adresse }}</p>
+        <p class="card-text"><strong><i class="bi bi-bandaid-fill"></i> Spécialité : </strong> {{ docteur.specialite }}</p>
+        <p class="card-text"><strong><i class="bi bi-star-fill"></i> Avis : </strong> {{ docteur.avis }}/5</p>
+      </div>
+    </div>
+
+    <!-- Calendrier des jours disponibles -->
+    <div class="bg-light p-3 rounded mt-4 text-center">
+      <h6><i class="bi bi-calendar-week"></i> Les horaires disponibles</h6>
+      <div class="d-flex justify-content-center flex-wrap">
+        <span
+          *ngFor="let day of docteur.availableDays"
+          class="badge bg-success m-1">
+          {{ day }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Bouton Prendre Rendez-vous -->
+    <div class="mt-3 text-center">
+      <button class="btn btn-primary shadow-sm" [routerLink]="['/docteur', docteur.INPE]"(click)="bookAppointment()">
+        <i class="bi bi-calendar2-check"></i> <strong> PRENDRE RENDEZ-VOUS</strong>
+      </button>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,29 @@
+<div class="patient-profile-card">
+  <!-- En-tête du profil -->
+  <div class="profile-header">
+    <i class="bi bi-person-circle profile-icon"></i>
+    <h2>{{ patient.prenom }} {{ patient.nom }}</h2>
+    <p class="profile-id">ID Patient : {{ patient.CIN }}</p>
+  </div>
+
+  <!-- Informations personnelles -->
+  <div class="profile-info">
+    <h3>Informations personnelles</h3>
+    <p><strong>Date de naissance :</strong> {{ patient.dateNaissance  }}</p>
+    <p><strong>Genre :</strong> {{ patient.sexe }}</p>
+    <p><strong>Numéro de téléphone :</strong> {{ patient.telephone }}</p>
+    <p><strong>Email :</strong> {{ patient.email }}</p>
+    <p><strong>Adresse :</strong> {{ patient.adresse }}</p>
+    <p><strong>Groupe sanguin :</strong> {{ patient.groupeSanguin }}</p>
+  </div>
+
+  <!-- Conditions médicales -->
+  <div class="profile-conditions">
+    <h3>Conditions médicales</h3>
+    <ul>
+      <li *ngFor="let condition of patient.historiqueMedical">
+        {{ condition }}
+      </li>
+    </ul>
+  </div>
+</div>
