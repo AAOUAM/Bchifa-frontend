@@ -1,0 +1,22 @@
+<div class="container text-center my-5">
+  <h2 class="mb-3">Gérez vos documents effacement </h2>
+  <div class="tabs">
+    <button class="tab" (click)="Onswitch()"  [ngClass]="{ 'active': showdoc }"> Documents</button>
+    <button class="tab" (click)="Onswitch()"  [ngClass]="{ 'active': !showdoc }"> Notes</button>
+  </div>
+
+  @if (showdoc) {
+   <app-documents></app-documents>
+
+  }
+  @else{
+    <app-notes> </app-notes>
+
+  }
+
+
+
+  <p class="mt-2">
+    <a href="#" class="link">Learn More</a>
+  </p>
+</div>

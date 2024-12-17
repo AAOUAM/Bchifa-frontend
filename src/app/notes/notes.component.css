@@ -1,0 +1,131 @@
+/* General Document Header Styles */
+.document-header {
+  background-color: #ffffff; /* Light gray background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.document-header h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #343a40; /* Dark gray text */
+}
+
+.document-header i {
+  font-size: 60px; /* Slightly larger icon */
+  color: #0078d7; /* Primary blue color */
+}
+
+.document-header button {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #0078d7;
+  color: #ffffff;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.document-header button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Card Styles */
+.card {
+  border-radius: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  max-width: 600px; /* Adjust width for a larger card */
+  margin: 20px auto; /* Center the card on the page */
+  padding: 20px; /* Add padding inside the card */
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #ffffff;
+}
+
+/* Form Group and Controls */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #343a40;
+}
+
+.form-control,
+textarea {
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #0078d7; /* Add a border color for consistency */
+  background-color: #f8f9fa; /* Light background for inputs */
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+button.btn-primary {
+  font-size: 1rem;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0078d7;
+  color: #ffffff;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button.btn-primary:hover {
+  transform: scale(1.05); /* Slight grow effect on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+button {
+  background-color: #0078d7;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Additional Mobile Responsiveness */
+@media (max-width: 768px) {
+  .card {
+    padding: 15px;
+  }
+
+  .document-header h1 {
+    font-size: 1.5rem;
+  }
+
+  button.btn-primary {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+}

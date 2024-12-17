@@ -1,0 +1,83 @@
+<div class="document-header text-center my-4">
+  <i class="bi bi-folder-plus text-primary" style="font-size: 48px;"></i>
+  <h1 class="mt-3">Gérer vos documents</h1>
+  <button
+    class="btn btn-primary btn-lg mt-4"
+    (click)="newDocument()"
+    *ngIf="!wannadddoc"
+  >
+    + Ajouter un document
+  </button>
+</div>
+
+<div class="document-form" *ngIf="wannadddoc">
+  <div class="card">
+    <div class="card-body">
+      <form (ngSubmit)="addDoc()">
+        <!-- Upload document -->
+        <div class="form-group">
+          <label for="document">Ajout d'un nouveau document</label>
+          <input
+            type="file"
+            id="document"
+            (change)="onFileSelected($event)"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <!-- Document Name -->
+        <div class="form-group">
+          <label for="documentName">Nom du document (optionnel)</label>
+          <input
+            type="text"
+            id="documentName"
+            [(ngModel)]="documentName"
+            name="documentName"
+            maxlength="50"
+            placeholder="Nom du document"
+            class="form-control"
+          />
+        </div>
+
+        <!-- Document Type -->
+        <div class="form-group">
+          <label >Type de votre document médical</label>
+          <select
+            [(ngModel)]="selectedType"
+            name="documentType"
+            class="form-select"
+            (ngModelChange)="onOptionsSelected($event)"
+            required
+          >
+            <option value="" disabled selected>
+              Sélectionnez le type de document
+            </option>
+            <option *ngFor="let type of documentTypes" [value]="type">
+              {{ type }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Encryption Info -->
+        <div class="form-group">
+          <div class="encryption-info">
+            <i class="bi bi-lock-fill"></i>
+            Ce document sera chiffré par la suite
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="card-footer justify-content-between">
+          <button type="submit" class="btn btn-primary me-2">
+            AJOUTER
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="cancelAddDoc()">
+            ANNULER
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

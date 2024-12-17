@@ -1,0 +1,45 @@
+<div class="document-header text-center my-4">
+  <i class="bi bi-card-checklist text-primary" style="font-size: 48px;"></i>
+  <h1 class="mt-3">Gérer vos notes</h1>
+  <button
+    class="btn btn-primary btn-lg mt-4"
+    (click)="newnote()"
+    *ngIf="!wannaddnote"
+  >
+    + Ajouter une note
+  </button>
+</div>
+
+
+
+
+<div class="document-form" *ngIf="wannaddnote">
+  <div class="card">
+    <div class="card-body">
+      <form>
+        <!-- Upload document -->
+        <div class="form-group">
+          <label for="titre">Titre : </label>
+          <input type="text" id="titre" [(ngModel)]="titre" class="form-control" required />
+        </div>
+
+        <!-- Document Name -->
+        <div class="form-group">
+          <label for="note">Votre note ?</label>
+          <textarea type="text" id="note" [(ngModel)]="noteContent"  > </textarea>
+        </div>
+
+
+
+        <div class="card-footer justify-content-between">
+          <button (click)="addnote()" class="btn btn-primary me-2" > AJOUTER </button>
+          <button (click)="canceladdNote()" class="btn btn-primary"> ANNULER </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
