@@ -1,0 +1,5 @@
+.map {
+  height: 600px;  /* Increase the height for a longer map */
+  width: 100%;    /* Keep it responsive to the width of the container */
+  border-radius: 15px;
+}

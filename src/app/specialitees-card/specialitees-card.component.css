@@ -1,0 +1,60 @@
+.info-card {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  width: 80%;
+  padding: 20px;
+  border-radius: 10px;
+  gap: 20px;
+}
+
+.info-card img {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+}
+
+.info-card p {
+  margin: 0;
+  color: #333;
+}
+
+.info-card a {
+  color: #489e6d;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.info-card a:hover {
+  text-decoration: underline;
+}
+
+.bbb{
+  font-size: large;
+}
+
+.imgdoc{
+  max-width: 400px ;
+}
+
+/* Specialites */
+.card {
+  border-radius: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-body i {
+  font-size: 3rem;
+  color: #489e6d;
+}
+
+.cl{
+  color : #0078d7 ;
+}

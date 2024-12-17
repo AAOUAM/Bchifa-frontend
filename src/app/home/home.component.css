@@ -1,0 +1,47 @@
+.header {
+  text-align: center;
+  background-color: #0078d7;
+  color: white;
+
+}
+
+.header h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+
+.imgdoc{
+  max-width: 590px ;
+  margin-left: -140px;
+}
+
+h1 {
+  font-family: 'Comic Sans MS', 'Brush Script MT', 'Lucida Handwriting', 'Segoe Script', cursive;
+  font-size: 2.5em;
+  text-align: center;
+}
+.handwritten{
+  font-family: 'Pacifico', cursive;
+  color : white;
+}
+
+.special-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #0078d7;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.special-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: #0078d7;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}

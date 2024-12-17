@@ -1,0 +1,21 @@
+.filter-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Espacement horizontal entre les filtres */
+  flex-wrap: wrap; /* Adaptation sur petits écrans */
+}
+
+.filter-container .btn-group {
+  min-width: 200px; /* Largeur minimale pour une uniformité visuelle */
+}
+
+.btn-group .dropdown-menu {
+  max-height: 200px; /* Limite la hauteur des longues listes */
+  overflow-y: auto; /* Ajoute un défilement vertical */
+}
+
+.btn-group .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacement entre la case à cocher et le texte */
+}
