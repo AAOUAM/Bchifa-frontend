@@ -1,0 +1,59 @@
+  .patient-profile-card {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .profile-icon {
+    font-size: 100px;
+    color: #007bff;
+    margin-bottom: 10px;
+
+  }
+
+  h2 {
+    margin: 10px 0;
+    color: #333;
+  }
+
+  .profile-id {
+    color: #6c757d;
+    font-style: italic;
+  }
+
+  .profile-info,
+  .profile-conditions {
+    margin-top: 20px;
+  }
+
+  .profile-info h3,
+  .profile-conditions h3 {
+    margin-bottom: 10px;
+    color: #007bff;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+  }
+
+  .profile-info p,
+  .profile-conditions li {
+    margin: 8px 0;
+    color: #555;
+  }
+
+  .profile-conditions ul {
+    list-style: disc;
+    margin-left: 20px;
+  }
+
+  .profile-conditions li {
+    font-size: 14px;
+  }

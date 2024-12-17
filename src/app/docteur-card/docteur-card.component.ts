@@ -1,12 +1,16 @@
 import {Component, Input} from '@angular/core';
 import {Docteur} from '../../Models/Docteur';
+
 import {NgForOf, NgIf} from '@angular/common';
+import {RouterLink} from '@angular/router';
+
 
 @Component({
   selector: 'app-docteur-card',
   standalone: true,
   imports: [
     NgForOf,
+    RouterLink
     NgIf
   ],
   templateUrl: './docteur-card.component.html',
