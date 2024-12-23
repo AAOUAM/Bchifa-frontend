@@ -6,6 +6,8 @@ import {PatientProfileComponent} from './patient-profile/patient-profile.compone
 import {SigninComponent} from './signin/signin.component';
 import {SignupComponent} from './signup/signup.component';
 import {InfoComponent} from './info/info.component';
+import { MessageComponent } from './message/message.component';
+import { RendezvousComponent } from './rendez-vous/rendez-vous.component';
 
 export const routes: Routes = [
   { path: 'Home', component: HomeComponent },
@@ -13,6 +15,8 @@ export const routes: Routes = [
   { path: 'docteur/:id', component: DocProfilComponent },
   { path: 'patient-profile', component: PatientProfileComponent },
   { path: 'info', component: InfoComponent },
+  { path: 'messages', component: MessageComponent },
+  { path: 'rendez-vous', component: RendezvousComponent },
   {
     path: '',
     redirectTo: 'Home',

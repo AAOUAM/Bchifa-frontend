@@ -1,0 +1,25 @@
+<div class="rendezvous-container">
+    <div class="rendezvous-cards">
+      <div class="card" *ngFor="let rendezvous of rendezvousList">
+        <div class="card-header">
+          <h3>{{ rendezvous.title }}</h3>
+        </div>
+        <div class="card-body">
+          <p><strong>Date:</strong> {{ rendezvous.date | date:'short' }}</p>
+          <p><strong>Location:</strong> {{ rendezvous.location }}</p>
+          <p><strong>Description:</strong> {{ rendezvous.description }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="calendar">
+      <div class="calendar-header">
+        <h3>{{ currentMonth | date: 'MMMM yyyy' }}</h3>
+      </div>
+      <div class="calendar-grid">
+        <div *ngFor="let day of daysInMonth" [class.rendezvous-day]="isRendezvousDate(day)">
+          {{ day }}
+        </div>
+      </div>
+    </div>
+  </div>
+  

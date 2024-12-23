@@ -1,0 +1,309 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: auto; /* Allow body to expand with content */
+    overflow: auto; /* Prevent scrolling */
+  }
+  .container {
+    min-height: 100vh; /* Set a minimum height for the container */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+  }
+  .container2 {
+    height: 100%; /* Match the container height */
+    overflow: hidden; /* Prevent scrolling */
+  }
+  .card {
+    background-color: #ffffff;
+    transition: .5s;
+    display: flex;
+    border: 0;
+    border-radius: .55rem;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+  }
+
+
+
+
+
+
+  .chat-app .people-list {
+    background-color: #E6F1FA;
+    width: 400px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 20px;
+    z-index: 7;
+  }
+  .chat-app .chat {
+    position: relative;
+    height: 100%;
+  
+    margin-left: 400px;
+    margin-right: 0px;
+    border-left: 1px solid #eaeaea;
+  }
+ 
+
+
+
+
+
+
+
+
+
+
+  .people-list {
+    height: 100%; /* Match the height of the parent container */
+    overflow-y: auto; /* Allow it to scroll if needed */
+  }
+  .people-list .chat-list {
+    padding-top: 10px;
+    margin: 0px;
+    border-radius: 0px;
+  }
+  .people-list .chat-list li {
+    padding: 10px 15px;
+    list-style: none;
+    border-radius: 15px;
+  }
+  .people-list .chat-list li:hover {
+    background: #638DE7;
+    transform: translate(10px, -10px)scale(1);
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+  .people-list .chat-list li.active {
+    background: #638DE7;
+  }
+  .people-list .chat-list li .name {
+    color: #333333;
+    font-size: 15px;
+  }
+  .people-list .chat-list img {
+    width: 45px;
+    border-radius: 50%;
+  }
+  .people-list img {
+    float: left;
+    border-radius: 50%;
+  }
+  .people-list .about {
+    float: left;
+    padding-left: 8px;
+  }
+  .people-list .status {
+    color: #666666 ;
+    font-size: 13px;
+  }
+
+
+
+  .people-list .input-group {
+    position: relative;
+    width: 40px; /* Initially, set the width to just show the icon */
+    height: 40px;
+    transition: width 0.3s ease; /* Smooth transition for expanding */
+  }
+  /* Search icon */
+  .people-list .input-group .input-group-prepend {
+    background-color: transparent; /* Transparent background */
+    border: none;
+    width: 100%; /* Make sure the icon takes up the full width */
+  }
+  .people-list .input-group .input-group-text {
+    background-color: transparent; /* Remove background */
+    border: none;
+    font-size: 20px; /* Set the size of the search icon */
+    cursor: pointer;
+  }
+  /* Initially hide the input field */
+  .people-list .input-group .form-control {
+    opacity: 0;
+    width: 0;
+    position: absolute;
+    left: 0;
+    transition: width 0.3s ease, opacity 0.3s ease; /* Smooth transition for expanding */
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+  /* Show the search bar when expanded */
+  .people-list .input-group.expanded {
+    width: 200px; /* Expand the width of the container */
+  }
+  .people-list .input-group.expanded .form-control {
+    opacity: 1; /* Make the input field visible */
+    width: 350px; /* Set the width to fill the container */
+  }
+
+
+
+
+  .chat {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Occupy full height of the parent container */
+    position: relative; /* Required for positioning the chat-message */
+  }
+  .chat .chat-header {
+    background-color: #d0ddfa;
+    padding: 15px 20px;
+  }
+  .chat .chat-header img {
+    float: left;
+    border-radius: 40px;
+    width: 50px;
+  }
+  .chat .chat-header .chat-about {
+    font-size: 16;
+    color: #2d3c53;
+    float: left;
+    padding-left: 10px;
+  }
+  
+  .chat-history {
+    background-color: #ffffff;
+    flex: 1; /* Take all available space except for the chat header and message input */
+    padding: 20px;
+    overflow-y: auto; /* Only this section should scroll */
+  }
+  .chat .chat-history ul {
+    padding: 0;
+    max-height: 500px;
+    overflow-y: auto;
+  }
+  .chat .chat-history ul li {
+    list-style: none;
+    margin-bottom: 30px;
+  }
+  .chat .chat-history ul li:last-child {
+    margin-bottom: 0;
+  }
+  .chat .chat-history .message-data {
+    margin-bottom: 15px;
+  }
+  .chat .chat-history .message-data img {
+    border-radius: 40px;
+    width: 40px;
+  }
+  .chat .chat-history .message-data-time {
+    color: #434651;
+    padding-left: 6px;
+  }
+  .chat .chat-history .message {
+    color: #ffffff;
+    padding: 18px 20px;
+    line-height: 26px;
+    font-size: 16px;
+    border-radius: 7px;
+    display: inline-block;
+    position: relative;
+  }
+  .chat .chat-history .my-message {
+    background: #6786FF;
+  }
+  .chat .chat-history .my-message:after {
+    bottom: 100%;
+    left: 30px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: #efefef;
+    border-width: 10px;
+    margin-left: -10px;
+  }
+  .chat .chat-history .other-message {
+    background: #9790cb;
+    text-align: right;
+  }
+  .chat .chat-history .other-message:after {
+    border-bottom-color: #e8f1f3;
+    left: 93%;
+  }
+
+  .chat-message {
+    border-top: 1px solid #ccc;
+    padding: 10px;
+    background: #fff;
+    position: absolute; /* Position it relative to the chat container */
+    bottom: 0;
+    width: 100%; /* Ensure it spans the full width */
+  }
+  .online {
+    color: #86c541;
+  }
+  .offline {
+    color: #e47297;
+  }
+  .me {
+    color: #1d8ecd;
+  }
+  .float-right {
+    float: right;
+  }
+  .clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+  @media only screen and (max-width: 767px) {
+    .chat-app .people-list {
+      height: 465px;
+      width: 100%;
+      overflow-x: auto;
+      background: #fff;
+      left: -400px;
+      display: none;
+    }
+    .chat-app .people-list.open {
+      left: 0;
+    }
+    .chat-app .chat {
+      margin: 0;
+    }
+    .chat-app .chat .chat-header {
+      border-radius: 0.55rem 0.55rem 0 0;
+    }
+    .chat-app .chat-history {
+      height: 300px;
+      overflow-x: auto;
+    }
+  }
+  @media only screen and (min-width: 768px) and (max-width: 992px) {
+    .chat-app .chat-list {
+      height: 650px;
+      overflow-x: auto;
+    }
+    .chat-app .chat-history {
+      height: 600px;
+      overflow-x: auto;
+    }
+  }
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
+    .chat-app .chat-list {
+      height: 480px;
+      overflow-x: auto;
+    }
+    .chat-app .chat-history {
+      height: calc(100vh - 350px);
+      overflow-x: auto;
+    }
+  }
