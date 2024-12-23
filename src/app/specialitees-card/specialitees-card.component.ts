@@ -6,8 +6,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-specialitees-card',
   standalone: true,
-  imports: [
-    NgIf
+  imports: [NgIf
   ],
   templateUrl: './specialitees-card.component.html',
   styleUrl: './specialitees-card.component.css'

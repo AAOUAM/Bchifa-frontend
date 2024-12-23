@@ -1,0 +1,125 @@
+
+
+
+
+<div class="container">
+  <h2>S'inscrire</h2>
+  <!-- Step 1: Email input -->
+  <div *ngIf="step === 1">
+    <p>Saisissez votre adresse email</p>
+    <input
+      type="email"
+      [formControl]="email"
+      placeholder="Adresse email"
+      [ngClass]="{ 'is-invalid': email.invalid && !email.untouched}"
+    />
+    <div *ngIf="email.invalid && !email.untouched" class="error">
+      Veuillez saisir un email valide.
+    </div>
+
+    <button (click)="nextStep()" [disabled]="email?.invalid">Continuer</button>
+  </div>
+
+
+
+
+  <!-- Step 2: Identity information -->
+  <div *ngIf="step === 2">
+    <strong>{{email.value}}</strong>
+
+    <!-- Gender selection -->
+    <div>
+      <label>
+        <input type="radio" [formControl]="gender" value="Féminin" /> Féminin
+      </label>
+      <label>
+        <input type="radio" [formControl]="gender" value="Masculin" /> Masculin
+      </label>
+    </div>
+    <div *ngIf="gender?.invalid && !gender?.untouched" class="error">
+      Genre est requis.
+    </div>
+
+    <!-- First Name -->
+    <input
+      type="text"
+      [formControl]="firstName"
+      placeholder="Prénom"
+      [ngClass]="{ 'is-invalid': firstName?.invalid && !firstName?.untouched }"
+    />
+    <div *ngIf="firstName?.invalid && !firstName?.untouched" class="error">
+      Prénom est obligatoire (min. 2 caractères).
+    </div>
+
+    <!-- Last Name -->
+    <input
+      type="text"
+      [formControl]="lastName"
+      placeholder="Nom"
+      [ngClass]="{ 'is-invalid': lastName?.invalid && !lastName?.untouched }"
+    />
+    <div *ngIf="lastName?.invalid && !lastName?.untouched" class="error">
+      Nom est obligatoire (min. 2 caractères).
+    </div>
+
+    <!-- Birth Date -->
+    <input
+      type="date"
+      [formControl]="birthDate"
+      placeholder="Date de naissance"
+      [ngClass]="{ 'is-invalid': birthDate.invalid && !birthDate.untouched }"
+    />
+    <div *ngIf="birthDate.errors?.['invalidDate'] && !birthDate.untouched" class="error">
+      Veuillez entrer une date valide.
+    </div>
+    <div *ngIf="birthDate.errors?.['underage'] && !birthDate.untouched" class="error">
+      Vous devez avoir au moins 18 ans pour vous inscrire.
+    </div>
+
+
+    <button (click)="previousStep()">Étape précédente</button>
+    <button (click)="nextStep()" [disabled]="form.invalid">Continuer</button>
+  </div>
+
+
+
+
+  <div *ngIf="step === 3" class="center-content">
+
+    <h2>Inscription réussie !</h2>
+    <p>Vous êtes maintenant enregistré avec succès. Vous pouvez vous connecter.</p>
+
+    <div class="modal-actions">
+      <button class="primary" routerLink="/signin">Page de connexion</button>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
+<div *ngIf="showAlert">
+  <div class="modal-overlay"></div>
+  <div class="modal">
+    <h2>Avez-vous déjà un compte ?</h2>
+    <p>
+      L'email saisi (<strong>{{ email.value }}</strong>) est déjà associé à un compte.
+      S'il s'agit du vôtre, connectez-vous.
+    </p>
+    <div class="modal-actions">
+      <button class="primary"  (click)="modifyEmail()">Modifier l'email saisi</button>
+      <button class="primary" routerLink="/signin">Se connecter</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

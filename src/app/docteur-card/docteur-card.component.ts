@@ -10,7 +10,7 @@ import {RouterLink} from '@angular/router';
   standalone: true,
   imports: [
     NgForOf,
-    RouterLink
+    RouterLink,
     NgIf
   ],
   templateUrl: './docteur-card.component.html',
