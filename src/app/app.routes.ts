@@ -12,6 +12,7 @@ export const routes: Routes = [
   { path: 'Listdocteur', component: ListdocteursComponent },
   { path: 'docteur/:id', component: DocProfilComponent },
   { path: 'patient-profile', component: PatientProfileComponent },
+  { path: 'info', component: InfoComponent },
   {
     path: '',
     redirectTo: 'Home',
