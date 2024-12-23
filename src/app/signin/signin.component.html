@@ -1,0 +1,34 @@
+<div class="signin-container">
+  <h2>Se connecter</h2>
+
+  <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+    <!-- Email Field -->
+    <input
+      type="email"
+      formControlName="email"
+      placeholder="Adresse email"
+      [ngClass]="{ 'is-invalid': email.invalid && !email.untouched }"
+    />
+    <div *ngIf="email.invalid && !email.untouched" class="error">
+      Veuillez entrer un email valide.
+    </div>
+
+    <!-- Password Field -->
+    <input
+      type="password"
+      formControlName="password"
+      placeholder="Mot de passe"
+      [ngClass]="{ 'is-invalid': password.invalid && password.untouched }"
+    />
+    <div *ngIf="password.invalid && !password.untouched" class="error">
+      Le mot de passe est requis.
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" [disabled]="signinForm.invalid">Se connecter</button>
+  </form>
+
+  <div class="signup-link">
+    <p>Pas encore inscrit ? <a routerLink="/signup">Créer un compte</a></p>
+  </div>
+</div>

@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class DocumentsComponent {
   wannadddoc = false; // Controls form visibility
-  documentName: string = 'Untitled document'; // Default document name
+  documentName: string = ''; // Default document name
   documentType: string | null = null; // Tracks the selected document type
   isDocumentType = false; // Tracks if a document type has been selected
   document: File | null = null; // Tracks the uploaded document
