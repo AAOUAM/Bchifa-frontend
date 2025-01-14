@@ -5,6 +5,8 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
@@ -14,6 +16,7 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
+    "strictNullChecks": false,
     "experimentalDecorators": true,
     "moduleResolution": "bundler",
     "importHelpers": true,

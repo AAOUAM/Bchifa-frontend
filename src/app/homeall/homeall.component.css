@@ -1,0 +1,88 @@
+.handwritten {
+  display: flex;
+  justify-content: center;
+  font-family: 'Cursive', sans-serif;
+}
+
+.subtitle {
+  font-family: 'Arial', sans-serif;
+  font-size: 18px;
+}
+
+.header {
+  background: linear-gradient(90deg, #0078d7, #0056a6);
+  color: #fff;
+  padding: 40px 20px;
+  border-radius: 5px;
+  text-align: center; /* Centrage horizontal */
+}
+
+.stats-section h2,
+.recommendations-section h3 {
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.carousel-inner img {
+  object-fit: cover;
+  height: 400px;
+
+}
+
+
+.banner-img {
+  object-fit: cover;
+  height: 400px;
+
+}
+
+.stats-section h2 {
+  font-size: 2.5rem;
+}
+
+.card {
+  border: none;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.special-title {
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: #0056a6;
+}
+
+.banner {
+  margin: 0;
+  background-color: #0078D7; /* Blue background */
+  padding: 20px 10px; /* Balanced padding for the content */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  color: white; /* Text color for better contrast */
+  text-align: center; /* Center align content */
+}
+
+
+
+
+.carousel-inner {
+  margin: 0; /* Ensures no extra space around carousel items */
+  padding: 0; /* Ensures no extra space inside the carousel */
+}
+
+.carousel-item img {
+  display: block; /* Prevents inline spacing issues */
+  margin: 0; /* Removes any margin on images */
+  padding: 0; /* Removes any padding on images */
+}
+
+.banner-img {
+  border-radius: 0; /* If the rounded class adds unnecessary space, override it here */
+}

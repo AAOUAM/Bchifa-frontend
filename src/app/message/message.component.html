@@ -1,0 +1,92 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<div class="container">
+  <div class="row clearfix container3">
+    <div class="col-lg-12 container2">
+      <div class="card chat-app">
+         <!-- disscusion list -->
+        <div id="plist" class="people-list">
+          <!-- search -->
+          <div class="hi">
+            <div class="input-group" (click)="toggleSearch()">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-search"></i></span>
+            </div>
+            <input type="text" class="form-control" placeholder="Search...">
+            </div>
+          </div>
+          <!-- ppl list -->
+          <ul class="list-unstyled chat-list mt-2 mb-0">
+            <li 
+              class="clearfix" 
+              *ngFor="let person of peopleList" 
+              [class.active]="selectedPerson?.id === person.id" 
+              (click)="selectPerson(person)">
+              <img [src]="person.avatar" alt="avatar">
+              <div class="about">
+                <div class="name">{{ person.name }}</div>
+                <div class="status">
+                  <i [class.fa-circle]="true" [class.online]="person.status === 'online'" [class.offline]="person.status === 'offline'"></i>
+                  {{ person.lastSeen }}
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- chat -->
+        <div class="chat">
+           <!-- current person -->
+          <div class="chat-header clearfix">
+            <div class="row">
+              <div class="col-lg-6">
+                <a href="javascript:void(0);">
+                  <img [src]="selectedPerson?.avatar" alt="avatar">
+                </a>
+                <div class="chat-about">
+                  <h6 class="m-b-0">{{ selectedPerson?.name }}</h6>
+                  <small>{{ selectedPerson?.status === 'online' ? 'Online' : 'Last seen: ' + selectedPerson?.lastSeen }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="chat-history">
+            <ul class="m-b-0">
+              <!-- Static messages -->
+              <li class="clearfix">
+                <div class="message-data text-right">
+                  <span class="message-data-time">10:10 AM, Today</span>
+                </div>
+                <div class="message other-message float-right">Hi Aiden, how are you? How is the project coming along?</div>
+              </li>
+              <li class="clearfix">
+                <div class="message-data">
+                  <span class="message-data-time">10:12 AM, Today</span>
+                </div>
+                <div class="message my-message">Are we meeting today?</div>
+              </li>
+              <li class="clearfix">
+                <div class="message-data">
+                  <span class="message-data-time">10:15 AM, Today</span>
+                </div>
+                <div class="message my-message">Project has been already finished and I have results to show you.</div>
+              </li>
+            </ul>
+          </div>
+            <!-- dynamic messages -->        
+          <div class="chat-message clearfix">
+            <div class="input-group mb-0">
+              <div class="input-group-prepend">
+                <span class="input-group-text" (click)="sendMessage()"><i class="fa fa-send"></i></span>
+              </div>
+              <input type="text" class="form-control" [(ngModel)]="newMessage" placeholder="Enter text here...">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,21 @@
+.header {
+  text-align: center;
+  background-color: #0078d7;
+  color: white;
+
+}
+
+.handwritten{
+  font-family: 'Pacifico', cursive;
+  color : white;
+}
+
+.fixed-map {
+  position: sticky;
+  top: 20px;
+  z-index: 10;
+  height: calc(100vh - 40px);
+  overflow: hidden;
+}
+
+

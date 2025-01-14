@@ -1,1 +1,27 @@
-<p>home works!</p>
+<div class="header">
+  <div class="row" style="align-items: center;">
+    <div class="col-sm-8">
+      <h1 class="handwritten" >Votre santé, notre priorité</h1>
+      <app-searchbar></app-searchbar>
+    </div>
+    <div class="col-sm-4">
+      <img src="assets/docs.png" class="imgdoc" alt="image docteur">
+    </div>
+  </div>
+</div>
+
+<h3 class="text-center my-4 special-title mt-5">Spécialités</h3>
+
+<div class="container mb-5">
+  <div class="row g-4">
+    <div class="col-md-4" *ngFor="let s of specialites">
+      <app-specialitees-card [specialite]="s"></app-specialitees-card>
+    </div>
+  </div>
+</div>
+
+
+<app-faq class="mt-5"></app-faq>
+
+
+

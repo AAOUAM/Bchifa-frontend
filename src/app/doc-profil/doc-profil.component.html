@@ -1,0 +1,136 @@
+<div class="doctor-card">
+  <!-- Informations principales du médecin -->
+  <div class="doctor-header">
+    <img src="{{ docteur.image }}" alt="Doctor Image" class="doctor-photo" />
+    <div class="doctor-info">
+      <h2>{{ docteur.nom }}</h2>
+      <p class="specialty">{{ docteur.specialite }}</p>
+      <p class="experience">{{ docteur.experience }} ans d'expérience</p>
+      <p class="address">
+        <strong>Cabinet :</strong> {{ docteur.cabinet.emplacement }}
+      </p>
+      <p class="availability-status">
+        <span class="status-available">Disponible aujourd'hui</span>
+      </p>
+    </div>
+  </div>
+  <div class="doctor-calendar">
+    <!-- Liste des jours -->
+    <div class="calendar-days">
+      <div
+        *ngFor="let day of docteur.availableDays"
+        class="day-tab"
+        (click)="selectedDay = day"
+        [class.active]="selectedDay === day">
+        <p>{{ day.Jour }}</p>
+      </div>
+    </div>
+
+    <!-- Horaires pour le jour sélectionné -->
+    <div class="calendar-hours" *ngIf="selectedDay">
+      <div class="time-slots">
+        <h3> {{ selectedDay.Jour }}</h3>
+        <button *ngFor="let time of selectedDay.heure" class="time-slot">
+          {{ time }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="book-button" style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+    <button style="background-color: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; cursor: pointer;">
+      Prendre un rendez-vous
+    </button>
+  </div>
+
+
+
+
+  <!-- Bouton pour prendre un rendez-vous -->
+
+
+</div>
+
+
+
+<!-- Second Card -->
+<div class="doctor-card">
+  <div class="doctor-header">
+   <div class="doctor-info">
+      <h2>{{ docteur.nom }} vous propose la consultation video</h2>
+
+      <p >
+        <i class="bi bi-laptop"></i>   Obtenez un rendez-vous plus rapidement
+      </p>
+      <p>    <i class="bi bi-stopwatch"></i>    Consultez votre soignant de chez vous</p>
+      <p>   <i class="bi bi-clipboard2-pulse-fill"></i>   Échangez des documents en toute sécurité</p>
+    </div>
+  </div>
+</div>
+
+<!-- Third Card -->
+<div class="doctor-card">
+  <div class="doctor-header">
+    <div class="doctor-info">  <h2><i class="bi bi-currency-euro"></i> Tarifs et remboursement</h2>
+
+
+        Enfants - {{ docteur.cabinet.tarifs.enfants }},&nbsp;&nbsp;&nbsp;
+        Adultes - {{ docteur.cabinet.tarifs.adultes }},<br>
+       Seniors - {{ docteur.cabinet.tarifs.seniors }}<br>
+
+      <strong class="status-available" >Assurance médicale acceptée</strong>
+
+    </div>
+
+      <div class="doctor-header">
+        <div class="doctor-info">
+    <div class="payment-methods">
+      <h2><i class="bi bi-wallet2"></i> Moyens de paiement</h2>
+      <p>Espèces</p>
+      <p>Carte bancaire</p>
+    </div>
+  </div>
+</div>
+
+  </div>
+
+</div>
+<div class="doctor-card">
+  <div class="doctor-header">
+    <div class="doctor-info">  <h2><i class="bi bi-geo-alt-fill"></i> Carte et Informations d'accès</h2>
+
+
+      <p><strong>Adresse :</strong> {{ docteur.Adresse }}</p>
+      <p><strong>Étage :</strong> {{ docteur.emplacementDetails.etage }}</p>
+      <p><strong>Accès :</strong> {{ docteur.emplacementDetails.acces }}</p>
+
+
+    </div>
+
+    <div class="doctor-header">
+      <div class="doctor-card">
+        <div class="doctor-header">
+          <div class="doctor-info">
+
+            <!-- Lien vers Google Maps -->
+            <p>
+              <strong>Voir sur Google Maps :</strong>
+              <a
+                [href]="'https://www.google.com/maps?q=' + docteur.latitude + ',' + docteur.longitude"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ouvrir la localisation
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+</div>
+
