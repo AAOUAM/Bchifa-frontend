@@ -192,7 +192,7 @@ export class SignupComponent  implements OnInit {
   }
 
   get emailD() {
-    return this.doctorForm.get('email') as FormControl;
+    return this.doctorForm.get('emailD') as FormControl;
   }
 
   get image() {
@@ -231,8 +231,10 @@ export class SignupComponent  implements OnInit {
 
   submitForm() {
     if (this.doctorForm.valid) {
-      console.log(this.doctorForm.value);
       alert('Docteur enregistré avec succès !');
+
+      console.log("nicoo")
+
     } else {
       alert('Veuillez compléter toutes les étapes du formulaire.');
     }
@@ -245,26 +247,36 @@ export class SignupComponent  implements OnInit {
 
 
   nextStep(): void {
-    if (this.step === 1 && this.emailP.valid) {
-      const enteredEmail = this.emailP.value;
+    if (this.userRole=='patient') {
+      if (this.step === 1 && this.emailP.valid) {
+        const enteredEmail = this.emailP.value;
 
-      // Check if email exists in the array
-      if (this.emailtest.includes(enteredEmail)) {
-        this.alertMessage = 'Cet email existe déjà chez nous !';
-        this.showAlert = true;
-        console.log(this.alertMessage);
-        return; // Prevent moving to the next step
+        // Check if email exists in the array
+        if (this.emailtest.includes(enteredEmail)) {
+          this.alertMessage = 'Cet email existe déjà chez nous !';
+          this.showAlert = true;
+          console.log(this.alertMessage);
+          return; // Prevent moving to the next step
+        }
+
+        this.step = 2; // Proceed to Step 2 if the email is valid and doesn't exist already
       }
-
-      this.step = 2; // Proceed to Step 2 if the email is valid and doesn't exist already
-    }
-    else if (this.step === 2 && this.patientForm.valid) {
-      // If form is valid, proceed to Step 3 (success message)
-      this.step = 3;
-    }
-    else {
-      // Optionally, handle the case where the form is invalid on Step 2
-      alert('Veuillez remplir correctement tous les champs.');
+      else if (this.step === 2 && this.patientForm.valid) {
+        // If form is valid, proceed to Step 3 (success message)
+        this.step = 3;
+      }
+      else {
+        // Optionally, handle the case where the form is invalid on Step 2
+        alert('Veuillez remplir correctement tous les champs.');
+      }
+    }else {
+      if(this.step == 4){
+        if (this.doctorForm.valid) {
+          this.submitForm();
+          this.step = this.step+1;
+        }
+      }
+      this.step = this.step+1;
     }
   }
 
