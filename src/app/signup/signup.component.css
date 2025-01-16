@@ -5,6 +5,7 @@
   font-family: Arial, sans-serif;
   border-radius: 15px; /* Rounded corners */
   box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.1);
+
 }
 
 input {
@@ -129,3 +130,27 @@ button:disabled {
   background-color: transparent; /* Light background */
 
 }
+
+
+
+
+button.selected {
+  background-color: #211639;
+  color: white;
+}
+
+table {
+  width: 50%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+table th {
+  background-color: #f2f2f2;
+}
+

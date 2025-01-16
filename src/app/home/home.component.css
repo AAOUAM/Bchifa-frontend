@@ -2,8 +2,8 @@
   text-align: center;
   background-color: #0078d7;
   color: white;
-
 }
+
 
 .header h1 {
   font-size: 36px;
@@ -11,9 +11,13 @@
 }
 
 
+
 .imgdoc{
   max-width: 590px ;
   margin-left: -140px;
+}
+.image{
+  max-width: 590px ;
 }
 
 h1 {
