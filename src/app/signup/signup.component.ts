@@ -6,7 +6,7 @@ import {
   Validators,
   ReactiveFormsModule,
   FormControl,
-  FormArray
+  FormArray, AbstractControl, ValidationErrors
 } from '@angular/forms';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {RouterLink} from '@angular/router';
@@ -56,37 +56,80 @@ export class SignupComponent  implements OnInit {
 
   constructor(private fb: FormBuilder,private typeUserService : TypeuserService) {
     this.patientForm = this.fb.group({
-      emailP: ['', [Validators.required, Validators.email]],
-      gender: ['', Validators.required],
-      firstName: ['', [Validators.required, Validators.minLength(2)]],
-      lastName: ['', [Validators.required, Validators.minLength(2)]],
-      birthDate: ['', [Validators.required, this.validateBirthDate]]
-    });
+        emailP: ['', [Validators.required, Validators.email]],
+        gender: ['', Validators.required],
+        passWordP: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.pattern(
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+            )
+          ],
+        ],
+        confirmPasswordP: ['', Validators.required],
+        firstName: ['', [Validators.required, Validators.minLength(2)]],
+        lastName: ['', [Validators.required, Validators.minLength(2)]],
+        birthDate: ['', [Validators.required, this.validateBirthDate]]
+      },
+
+      {
+        validators: this.passwordMatchValidatorP,
+      }
+
+    );
 
 
     this.doctorForm = this.fb.group({
-      INPE: ['', [Validators.required]],
-      nom: ['', [Validators.required, Validators.minLength(2)]],
-      prenom: ['', [Validators.required, Validators.minLength(2)]],
-      description: ['', Validators.required],
-      specialite: ['', Validators.required],
-      telephone: ['', [Validators.required, Validators.pattern(/^\+?\d{10,15}$/)]],
-      emailD: ['', [Validators.required, Validators.email]],
-      image: [''],
-      Adresse: ['', Validators.required],
-      availableDays: [[], Validators.required],
-      latitude: ['', Validators.required],
-      longitude: ['', Validators.required],
-      prixConsultation: ['', [Validators.required, Validators.min(0)]],
-      GenreConsultation: ['', Validators.required],
-      Langue: ['', Validators.required],
-    });
+        INPE: ['', [Validators.required]],
+        nom: ['', [Validators.required, Validators.minLength(2)]],
+        prenom: ['', [Validators.required, Validators.minLength(2)]],
+        description: ['', Validators.required],
+        passWordD: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(8), // Minimum length of 8 characters
+            Validators.pattern(
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+            ),
 
+          ],
+        ],
+        confirmPasswordD: ['', Validators.required],
+        specialite: ['', Validators.required],
+        telephone: ['', [Validators.required, Validators.pattern(/^\+?\d{10,15}$/)]],
+        emailD: ['', [Validators.required, Validators.email]],
+        image: [''],
+        Adresse: ['', Validators.required],
+        availableDays: [[], Validators.required],
+        latitude: ['', Validators.required],
+        longitude: ['', Validators.required],
+        prixConsultation: ['', [Validators.required, Validators.min(0)]],
+        GenreConsultation: ['', Validators.required],
+        Langue: ['', Validators.required],
+      },
+      {
+        validators: this.passwordMatchValidatorD,
+      }
+    );
+
+  }
+
+  passwordMatchValidatorP(formGroup: FormGroup): ValidationErrors | null {
+    const password = formGroup.get('passWordP')?.value;
+    const confirmPassword = formGroup.get('confirmPasswordP')?.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
 
 
-
+  passwordMatchValidatorD(formGroup: FormGroup): ValidationErrors | null {
+    const password = formGroup.get('passWordD')?.value;
+    const confirmPassword = formGroup.get('confirmPasswordD')?.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
+  }
 
 
 
@@ -138,7 +181,7 @@ export class SignupComponent  implements OnInit {
     if (age < 18) {
       return { underage: true }; // User is not at least 18 years old
     }
-    return null; // Valid date
+    return null;
   }
 
 
@@ -147,6 +190,25 @@ export class SignupComponent  implements OnInit {
   get emailP(): FormControl {
     return this.patientForm.get('emailP') as FormControl;
   }
+
+  get passWordP(): FormControl {
+    return this.patientForm.get('passWordP') as FormControl;
+  }
+
+  get passWordD(): FormControl {
+    return this.doctorForm.get('passWordD') as FormControl;
+  }
+
+  get confirmPasswordD(): FormControl {
+    return this.doctorForm.get('confirmPasswordD') as FormControl;
+  }
+
+  get confirmPasswordP(): FormControl {
+    return this.patientForm.get('confirmPasswordP') as FormControl;
+  }
+
+
+
 
   get gender(): FormControl {
     return this.patientForm.get('gender') as FormControl;

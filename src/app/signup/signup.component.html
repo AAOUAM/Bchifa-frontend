@@ -3,7 +3,8 @@
 
     <div class="container">
       <h2>S'inscrire</h2>
-      <!-- Step 1: Email input -->
+
+
       <div *ngIf="step === 1">
         <p>Saisissez votre adresse email</p>
         <input
@@ -15,8 +16,31 @@
         <div *ngIf="emailP.invalid && !emailP.untouched" class="error">
           Veuillez saisir un email valide.
         </div>
+        <input
+          type="password"
+          [formControl]="passWordP"
+          placeholder="Mot de passe"
+          [ngClass]="{ 'is-invalid': patientForm.controls['passWordP'].invalid && patientForm.controls['passWordP'].untouched! }"
+        />
+        <div *ngIf="patientForm.controls['passWordP'].invalid && patientForm.controls['passWordP'].untouched!" class="error">
+          Mot de passe obligatoire (8 caractères min., 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial).
+        </div>
 
-        <button (click)="nextStep()" [disabled]="emailP?.invalid">Continuer</button>
+        <!-- Confirm Password Input -->
+        <input
+          type="password"
+          [formControl]="confirmPasswordP"
+          placeholder="Confirmez le mot de passe"
+          [ngClass]="{ 'is-invalid': patientForm.errors?.['passwordMismatch'] && patientForm.controls['confirmPasswordP'].untouched! }"
+        />
+        <div *ngIf="patientForm.errors?.['passwordMismatch'] && patientForm.controls['confirmPasswordP'].untouched!" class="error">
+          Les mots de passe ne correspondent pas.
+        </div>
+
+        <button (click)="nextStep()" [disabled]="  patientForm.get('emailP')?.invalid ||
+                                       patientForm.hasError('passwordMismatch') ||
+                                       patientForm.get('confirmPasswordP')?.invalid">Continuer
+        </button>
       </div>
 
 
@@ -160,10 +184,39 @@
           Prénom est obligatoire (min. 2 caractères).
         </div>
 
+        <input
+          type="password"
+          [formControl]="passWordD"
+          placeholder="Mot de passe"
+          [ngClass]="{ 'is-invalid': doctorForm.controls['passWordD'].invalid && doctorForm.controls['passWordD'].untouched! }"
+        />
+        <div *ngIf="doctorForm.controls['passWordD'].invalid && doctorForm.controls['passWordD'].untouched!" class="error">
+          Mot de passe obligatoire (8 caractères min., 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial).
+        </div>
 
-        <button (click)="nextStepDoc()" [disabled]="doctorForm.controls['INPE'].invalid || doctorForm.controls['nom'].invalid || doctorForm.controls['prenom'].invalid ">
+        <!-- Confirm Password Input -->
+        <input
+          type="password"
+          [formControl]="confirmPasswordD"
+          placeholder="Confirmez le mot de passe"
+          [ngClass]="{ 'is-invalid': doctorForm.errors?.['passwordMismatch'] && doctorForm.controls['confirmPasswordD'].untouched! }"
+        />
+        <div *ngIf="doctorForm.hasError('passwordMismatch') && doctorForm.get('confirmPasswordD')?.untouched!" class="error">
+          Les mots de passe ne correspondent pas.
+        </div>
+
+
+        <button
+          (click)="nextStepDoc()"
+          [disabled]="
+        doctorForm.get('INPE')?.invalid ||
+        doctorForm.get('nom')?.invalid ||
+        doctorForm.get('prenom')?.invalid ||
+        doctorForm.hasError('passwordMismatch') ||
+        doctorForm.get('confirmPasswordD')?.invalid ">
           Continuer
         </button>
+
       </div>
 
 
