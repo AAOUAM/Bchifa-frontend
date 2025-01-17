@@ -311,4 +311,27 @@ export class SignupComponent  implements OnInit {
     alert('Redirection vers la page de connexion'); // Vous pouvez ajouter une navigation ici
   }
 
+
+  selectedFile : File | null = null; // Fichier sélectionné
+  previewUrl: string | ArrayBuffer | null = null; // URL de prévisualisation
+  fileTouched: boolean = false; // Indicateur si le fichier a été touché
+
+  // Méthode pour gérer la sélection de fichier
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.fileTouched = true;
+
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+
+      // Générer une URL de prévisualisation
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.previewUrl = reader.result;
+      };
+      reader.readAsDataURL(this.selectedFile);
+    }
+  }
+
+
 }
