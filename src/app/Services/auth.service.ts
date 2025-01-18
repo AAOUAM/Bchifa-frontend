@@ -21,6 +21,7 @@ export class AuthService {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
   }
 
+
   login(email: string, password : string): void {
     const user: User = { email,password};
     this.userSubject.next(user);
