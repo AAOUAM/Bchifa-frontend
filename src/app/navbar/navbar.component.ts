@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {NgIf} from '@angular/common';
 import {AuthService} from '../Services/auth.service';
+import {TypeuserService} from '../Services/typeuser.service';
+import {NavbarStateService} from '../shared/navbar-state.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,12 +19,23 @@ import {AuthService} from '../Services/auth.service';
 export class NavbarComponent implements OnInit {
   isUserAuthenticated: boolean = false;
   userEmail: string | null = null;
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private userTypeService: TypeuserService ,private navbarStateService: NavbarStateService ) {
+
 
   }
 
+  showButtons: boolean = true;
+  patient = false;
+
+
+
 
   ngOnInit(): void {
+
+
+    this.navbarStateService.showButtons$.subscribe((state) => {
+      this.showButtons = state;
+    });
     // Simulate authentication subscription
     this.authService.user$.subscribe((user) => {
       if (user) {
@@ -33,6 +46,8 @@ export class NavbarComponent implements OnInit {
         this.userEmail = null;
       }
     });
+
+
   }
 
 

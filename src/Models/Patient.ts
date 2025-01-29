@@ -21,6 +21,7 @@ export class Patient {
     adresse: string,
     groupeSanguin?: string,
     historiqueMedical?: string[]
+
   ) {
     this.CIN = CIN;
     this.nom = nom;

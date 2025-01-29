@@ -1,5 +1,4 @@
 import {SpecialitesMedicales} from "./SpecialitesMedicales";
-import {AvailableDay} from './AvailableDay';
 
 export class Docteur {
   INPE!: number;
@@ -16,7 +15,7 @@ export class Docteur {
   avis!:number ;
   prixConsultation!: number;
   GenreConsultation! : string;
-  Langue! : String[]
+  Langue! : string[]
 
   constructor(
     INPE: number,
@@ -27,7 +26,7 @@ export class Docteur {
     email: string,
     image: string,
     Adresse: string,
-    availableDays: String[],
+    availableDays: string[],
     latitude: number,
     longitude: number,
     avis : number,

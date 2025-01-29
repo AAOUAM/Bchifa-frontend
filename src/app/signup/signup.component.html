@@ -1,125 +1,375 @@
+<div style="min-height: 70vh; padding-top: 20vh" >
+  <div *ngIf="userRole=='patient'" >
+
+    <div class="container">
+      <h2>S'inscrire</h2>
+
+
+      <div *ngIf="step === 1">
+        <p>Saisissez votre adresse email</p>
+        <input
+          type="email"
+          [formControl]="emailP"
+          placeholder="Adresse email"
+          [ngClass]="{ 'is-invalid': emailP.invalid && !emailP.untouched}"
+        />
+        <div *ngIf="emailP.invalid && !emailP.untouched" class="error">
+          Veuillez saisir un email valide.
+        </div>
+        <input
+          type="password"
+          [formControl]="passWordP"
+          placeholder="Mot de passe"
+          [ngClass]="{ 'is-invalid': patientForm.controls['passWordP'].invalid && patientForm.controls['passWordP'].untouched! }"
+        />
+        <div *ngIf="patientForm.controls['passWordP'].invalid && patientForm.controls['passWordP'].untouched!" class="error">
+          Mot de passe obligatoire (8 caractères min., 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial).
+        </div>
+
+        <!-- Confirm Password Input -->
+        <input
+          type="password"
+          [formControl]="confirmPasswordP"
+          placeholder="Confirmez le mot de passe"
+          [ngClass]="{ 'is-invalid': patientForm.errors?.['passwordMismatch'] && patientForm.controls['confirmPasswordP'].untouched! }"
+        />
+        <div *ngIf="patientForm.errors?.['passwordMismatch'] && patientForm.controls['confirmPasswordP'].untouched!" class="error">
+          Les mots de passe ne correspondent pas.
+        </div>
+
+        <button (click)="nextStep()" [disabled]="  patientForm.get('emailP')?.invalid ||
+                                       patientForm.hasError('passwordMismatch') ||
+                                       patientForm.get('confirmPasswordP')?.invalid">Continuer
+        </button>
+      </div>
 
 
 
 
-<div class="container">
-  <h2>S'inscrire</h2>
-  <!-- Step 1: Email input -->
-  <div *ngIf="step === 1">
-    <p>Saisissez votre adresse email</p>
-    <input
-      type="email"
-      [formControl]="email"
-      placeholder="Adresse email"
-      [ngClass]="{ 'is-invalid': email.invalid && !email.untouched}"
-    />
-    <div *ngIf="email.invalid && !email.untouched" class="error">
-      Veuillez saisir un email valide.
+      <!-- Step 2: Identity information -->
+      <div *ngIf="step === 2">
+        <strong>{{emailP.value}}</strong>
+        <div>
+          <label>
+            <input type="radio" [formControl]="gender" value="Féminin" /> Féminin
+          </label>
+          <label>
+            <input type="radio" [formControl]="gender" value="Masculin" /> Masculin
+          </label>
+        </div>
+        <div *ngIf="gender?.invalid && !gender?.untouched" class="error">
+          Genre est requis.
+        </div>
+        <input
+          type="text"
+          [formControl]="firstName"
+          placeholder="Prénom"
+          [ngClass]="{ 'is-invalid': firstName?.invalid && !firstName?.untouched }"
+        />
+        <div *ngIf="firstName?.invalid && !firstName?.untouched" class="error">
+          Prénom est obligatoire (min. 2 caractères).
+        </div>
+
+        <!-- Last Name -->
+        <input
+          type="text"
+          [formControl]="lastName"
+          placeholder="Nom"
+          [ngClass]="{ 'is-invalid': lastName?.invalid && !lastName?.untouched }"
+        />
+        <div *ngIf="lastName?.invalid && !lastName?.untouched" class="error">
+          Nom est obligatoire (min. 2 caractères).
+        </div>
+
+        <!-- Birth Date -->
+        <input
+          type="date"
+          [formControl]="birthDate"
+          placeholder="Date de naissance"
+          [ngClass]="{ 'is-invalid': birthDate.invalid && !birthDate.untouched }"
+        />
+        <div *ngIf="birthDate.errors?.['invalidDate'] && !birthDate.untouched" class="error">
+          Veuillez entrer une date valide.
+        </div>
+        <div *ngIf="birthDate.errors?.['underage'] && !birthDate.untouched" class="error">
+          Vous devez avoir au moins 18 ans pour vous inscrire.
+        </div>
+
+
+        <button (click)="previousStep()">Étape précédente</button>
+        <button (click)="nextStep()" [disabled]="patientForm.invalid">Continuer</button>
+      </div>
+
+
+
+
+
+      <div *ngIf="step === 3" class="center-content">
+
+        <h2>Inscription réussie !</h2>
+        <p>Vous êtes maintenant enregistré avec succès. Vous pouvez vous connecter.</p>
+
+        <div class="modal-actions">
+          <button class="primary" routerLink="/signin">Page de connexion</button>
+        </div>
+      </div>
+
+
     </div>
 
-    <button (click)="nextStep()" [disabled]="email?.invalid">Continuer</button>
+
+
+
+
+
+
+    <div *ngIf="showAlert">
+      <div class="modal-overlay"></div>
+      <div class="modal">
+        <h2>Avez-vous déjà un compte ?</h2>
+        <p>
+          L'email saisi (<strong>{{ emailP.value }}</strong>) est déjà associé à un compte.
+          S'il s'agit du vôtre, connectez-vous.
+        </p>
+        <div class="modal-actions">
+          <button class="primary"  (click)="modifyEmail()">Modifier l'email saisi</button>
+          <button class="primary" routerLink="/signin">Se connecter</button>
+        </div>
+      </div>
+    </div>
+
+
+
+
   </div>
 
 
+  <div *ngIf="userRole=='doctor' " >
 
 
-  <!-- Step 2: Identity information -->
-  <div *ngIf="step === 2">
-    <strong>{{email.value}}</strong>
+    <div class="container">
+      <h2>S'inscrire docteur </h2>
 
-    <!-- Gender selection -->
-    <div>
-      <label>
-        <input type="radio" [formControl]="gender" value="Féminin" /> Féminin
-      </label>
-      <label>
-        <input type="radio" [formControl]="gender" value="Masculin" /> Masculin
-      </label>
+      <!-- Step 1: Basic Information -->
+      <div *ngIf="step === 1">
+        <p>Informations de base</p>
+        <input
+          type="number"
+          [formControl]="INPE"
+          placeholder="INPE"
+          [ngClass]="{ 'is-invalid': doctorForm.controls['INPE'].invalid && doctorForm.controls['INPE'].untouched! }"
+        />
+        <div *ngIf="INPE.invalid && doctorForm.controls['INPE'].untouched!" class="error">
+          INPE est obligatoire.
+        </div>
+
+        <input
+          type="text"
+          [formControl]="nom"
+          placeholder="Nom"
+          [ngClass]="{ 'is-invalid': doctorForm.controls['nom'].invalid && doctorForm.controls['nom'].untouched! }"
+        />
+        <div *ngIf="doctorForm.controls['nom'].invalid && doctorForm.controls['nom'].untouched!" class="error">
+          Nom est obligatoire (min. 2 caractères).
+        </div>
+
+
+        <input
+          type="text"
+          [formControl]="prenom"
+          placeholder="Prénom"
+          [ngClass]="{ 'is-invalid': doctorForm.controls['prenom'].invalid && doctorForm.controls['prenom'].untouched! }"
+        />
+        <div *ngIf="doctorForm.controls['prenom'].invalid && doctorForm.controls['prenom'].untouched!" class="error">
+          Prénom est obligatoire (min. 2 caractères).
+        </div>
+
+        <input
+          type="password"
+          [formControl]="passWordD"
+          placeholder="Mot de passe"
+          [ngClass]="{ 'is-invalid': doctorForm.controls['passWordD'].invalid && doctorForm.controls['passWordD'].untouched! }"
+        />
+        <div *ngIf="doctorForm.controls['passWordD'].invalid && doctorForm.controls['passWordD'].untouched!" class="error">
+          Mot de passe obligatoire (8 caractères min., 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial).
+        </div>
+
+        <!-- Confirm Password Input -->
+        <input
+          type="password"
+          [formControl]="confirmPasswordD"
+          placeholder="Confirmez le mot de passe"
+          [ngClass]="{ 'is-invalid': doctorForm.errors?.['passwordMismatch'] && doctorForm.controls['confirmPasswordD'].untouched! }"
+        />
+        <div *ngIf="doctorForm.hasError('passwordMismatch') && doctorForm.get('confirmPasswordD')?.untouched!" class="error">
+          Les mots de passe ne correspondent pas.
+        </div>
+
+
+        <button
+          (click)="nextStepDoc()"
+          [disabled]="
+        doctorForm.get('INPE')?.invalid ||
+        doctorForm.get('nom')?.invalid ||
+        doctorForm.get('prenom')?.invalid ||
+        doctorForm.hasError('passwordMismatch') ||
+        doctorForm.get('confirmPasswordD')?.invalid ">
+          Continuer
+        </button>
+
+      </div>
+
+
+      <div *ngIf="step === 2">
+        <p>Informations de contact</p>
+        <input
+          type="text"
+          [formControl]="telephone"
+          placeholder="Téléphone"
+          [ngClass]="{ 'is-invalid': doctorForm.controls['telephone'].invalid && doctorForm.controls['telephone'].untouched! }"
+        />
+        <div *ngIf="doctorForm.controls['telephone'].invalid && doctorForm.controls['telephone'].untouched!" class="error">
+          Veuillez entrer un numéro de téléphone valide.
+        </div>
+
+        <input
+          type="email"
+          [formControl]="emailD"
+          placeholder="Adresse email"
+          [ngClass]="{ 'is-invalid': emailD.invalid && !emailD.untouched}"
+        />
+        <div *ngIf="emailD.invalid && !emailD.untouched" class="error">
+          Veuillez saisir un email valide.
+        </div>
+
+        <button (click)="previousStep()">Étape précédente</button>
+        <button (click)="nextStepDoc()" [disabled]="emailD?.invalid || telephone?.invalid" >
+          Continuer
+        </button>
+      </div>
+
+
+
+
+
+<!--      <div *ngIf="step==3">-->
+<!--        <div (submit)="onSubmit()" >-->
+<!--            <label >Prix Consultation</label>-->
+<!--            <input  [formControl]="prixConsultation" type="number" placeholder="Prix Consultation en DH " />-->
+
+<!--            <label for="GenreConsultation">Genre Consultation</label>-->
+<!--            <select [formControl]="GenreConsultation"  id="GenreConsultation">-->
+<!--              <option value="en Personne">En Personne</option>-->
+<!--              <option value="a distance">A Distance</option>-->
+<!--              &lt;!&ndash; Add more options as necessary &ndash;&gt;-->
+<!--            </select>-->
+
+<!--            <label for="langue">Langue</label>-->
+<!--            <input  [formControl]="Langue" id="langue" type="text" placeholder="Arab" />-->
+
+
+<!--          <button type="submit" (click)="nextStep()" [disabled]="GenreConsultation.invalid || prixConsultation.invalid ">Submit</button>-->
+<!--        </div>-->
+<!--      </div>-->
+      <div *ngIf="step == 3">
+        <div >
+          <label for="prixConsultation">Prix Consultation</label>
+          <input
+            [formControl]="prixConsultation"
+            id="prixConsultation"
+            type="number"
+            placeholder="Prix Consultation en DH"
+          />
+
+          <label for="GenreConsultation">Genre Consultation</label>
+          <select
+            [formControl]="GenreConsultation"
+            id="GenreConsultation">
+            <option value="en Personne">En Personne</option>
+            <option value="a distance">A Distance</option>
+          </select>
+
+          <label for="langue">Langue</label>
+          <input
+            [formControl]="Langue"
+            id="langue"
+            type="text"
+            placeholder="Arab"
+          />
+
+          <button
+            (click)="nextStep()"
+            [disabled]="doctorForm.controls['GenreConsultation'].invalid || doctorForm.controls['prixConsultation'].invalid"> Continuer
+
+          </button>
+        </div>
+      </div>
+
+
+
+
+
+      <!-- Step : Specialization and Other Details -->
+      <div *ngIf="step === 4">
+        <p>Spécialisation et détails supplémentaires</p>
+        <select
+          [formControl]="specialite"
+          [ngClass]="{ 'is-invalid': doctorForm.controls['specialite'].invalid && doctorForm.controls['specialite'].untouched! }"
+        >
+          <option value="" disabled selected>Spécialité</option>
+          <option *ngFor="let specialite of specialites" [value]="specialite">{{ specialite }}</option>
+        </select>
+
+        <div *ngIf="doctorForm.controls['specialite'].invalid && doctorForm.controls['specialite'].untouched!" class="error">
+          Spécialité est obligatoire.
+        </div>
+
+        <textarea
+          [formControl]="description"
+          placeholder="Description"
+          [ngClass]="{ 'is-invalid': doctorForm.controls['description'].invalid && doctorForm.controls['description'].untouched! }"
+        ></textarea>
+        <div *ngIf="doctorForm.controls['description'].invalid && doctorForm.controls['description'].untouched!" class="error">
+          Description est obligatoire.
+        </div>
+
+        <button (click)="previousStep()">Étape précédente</button>
+        <button (click)="nextStep()"  [disabled]="doctorForm.controls['description'].invalid || doctorForm.controls['specialite'].invalid"> Continuer </button>
+      </div>
+
+
+      <div *ngIf="step === 5" class="center-content">
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          [ngClass]="{ 'is-invalid': !selectedFile && fileTouched }"
+        />
+        <div *ngIf="!selectedFile && fileTouched" class="error">
+          Veuillez sélectionner une image de profil valide.
+        </div>
+        <div *ngIf="previewUrl" class="preview-container">
+          <img  style="max-height: 100px ; max-width: max-content ; border-radius: 10px "  [src]="previewUrl" alt="Prévisualisation de l'image" />
+        </div>
+        <button (click)="previousStep()">Étape précédente</button>
+        <button (click)="nextStep()" [disabled]="!selectedFile">Continuer</button>
+      </div>
+
+
+
+
+
+      <div *ngIf="step === 6" class="center-content">
+
+        <h2>Inscription réussie !</h2>
+        <p>Vous êtes maintenant enregistré avec succès. Vous pouvez vous connecter.</p>
+
+        <div class="modal-actions">
+          <button class="primary" routerLink="/signin">Page de connexion</button>
+        </div>
+
+      </div>
+
     </div>
-    <div *ngIf="gender?.invalid && !gender?.untouched" class="error">
-      Genre est requis.
-    </div>
-
-    <!-- First Name -->
-    <input
-      type="text"
-      [formControl]="firstName"
-      placeholder="Prénom"
-      [ngClass]="{ 'is-invalid': firstName?.invalid && !firstName?.untouched }"
-    />
-    <div *ngIf="firstName?.invalid && !firstName?.untouched" class="error">
-      Prénom est obligatoire (min. 2 caractères).
-    </div>
-
-    <!-- Last Name -->
-    <input
-      type="text"
-      [formControl]="lastName"
-      placeholder="Nom"
-      [ngClass]="{ 'is-invalid': lastName?.invalid && !lastName?.untouched }"
-    />
-    <div *ngIf="lastName?.invalid && !lastName?.untouched" class="error">
-      Nom est obligatoire (min. 2 caractères).
-    </div>
-
-    <!-- Birth Date -->
-    <input
-      type="date"
-      [formControl]="birthDate"
-      placeholder="Date de naissance"
-      [ngClass]="{ 'is-invalid': birthDate.invalid && !birthDate.untouched }"
-    />
-    <div *ngIf="birthDate.errors?.['invalidDate'] && !birthDate.untouched" class="error">
-      Veuillez entrer une date valide.
-    </div>
-    <div *ngIf="birthDate.errors?.['underage'] && !birthDate.untouched" class="error">
-      Vous devez avoir au moins 18 ans pour vous inscrire.
-    </div>
-
-
-    <button (click)="previousStep()">Étape précédente</button>
-    <button (click)="nextStep()" [disabled]="form.invalid">Continuer</button>
   </div>
-
-
-
-
-  <div *ngIf="step === 3" class="center-content">
-
-    <h2>Inscription réussie !</h2>
-    <p>Vous êtes maintenant enregistré avec succès. Vous pouvez vous connecter.</p>
-
-    <div class="modal-actions">
-      <button class="primary" routerLink="/signin">Page de connexion</button>
-    </div>
-  </div>
-
 
 </div>
-
-
-
-
-
-
-
-<div *ngIf="showAlert">
-  <div class="modal-overlay"></div>
-  <div class="modal">
-    <h2>Avez-vous déjà un compte ?</h2>
-    <p>
-      L'email saisi (<strong>{{ email.value }}</strong>) est déjà associé à un compte.
-      S'il s'agit du vôtre, connectez-vous.
-    </p>
-    <div class="modal-actions">
-      <button class="primary"  (click)="modifyEmail()">Modifier l'email saisi</button>
-      <button class="primary" routerLink="/signin">Se connecter</button>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-

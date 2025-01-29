@@ -1,0 +1,50 @@
+<div class="container-fluid  p-0" >
+  <!-- Welcome Section -->
+  <div class="row flex-grow-1 mb-4 align-items-center text-white banner" style="min-height: 40vh">
+    <div class="col-12 text-center">
+      <h1 class="display-4 fw-bold">Bienvenue, Docteur</h1>
+      <p class="lead">Gérez vos patients, planifiez vos consultations, et accédez à vos outils en toute simplicité.</p>
+    </div>
+  </div>
+
+  <!-- Dashboard Options Section -->
+  <div class="row flex-grow-1 g-3 justify-content-center"  style="min-height: 15vh" >
+    <div class="col-md-3" *ngFor="let card of dashboardCards">
+      <div class="card dashboard-card shadow-sm">
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ card.title }}</h5>
+          <p class="card-text">{{ card.description }}</p>
+          <button class="btn btn-primary">{{ card.action }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</div>
+
+
+<!--<div class="row justify-content-center mt-5">-->
+<!--  <div class="col-12 text-center">-->
+<!--    <h2 class="fw-bold">Venez vous inscrire pour sauver plus de vies !</h2>-->
+<!--    <p class="lead">Rejoignez-nous et faites une différence. Enregistrez-vous maintenant pour offrir des soins à davantage de personnes.</p>-->
+<!--    <button class="btn btn-success">S'inscrire maintenant</button>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<div class="container-fluid  py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <h2 class="fw-bold">Venez vous inscrire pour sauver plus de vies !</h2>
+      <p class="lead">Rejoignez-nous et faites une différence. Enregistrez-vous maintenant pour offrir des soins à davantage de personnes.</p>
+      <button class="btn btn-primary btn-lg">S'inscrire maintenant</button>
+    </div>
+  </div>
+</div>
+
+
+

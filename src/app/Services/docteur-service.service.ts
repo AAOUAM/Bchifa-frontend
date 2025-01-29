@@ -66,7 +66,7 @@ export class DocteurService {
       avis: 4.5,
       universite: 'Université Hassan II de Casablanca',
       diplome: 'Spécialisation en pédiatrie',
-      experience: '15 ans d expérience en soins pédiatriques',
+      experience: '15 ans d expérience enw soins pédiatriques',
       cabinet: {
         emplacement: 'Boulevard Mohamed Zerktouni, Casablanca',
         tarifs: {
