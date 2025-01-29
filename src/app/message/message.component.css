@@ -1,20 +1,23 @@
 body {
     margin: 0;
     padding: 0;
-    height: auto; /* Allow body to expand with content */
+    height: 80vh; /* Allow body to expand with content */
     overflow: auto; /* Prevent scrolling */
+   
   }
   .container {
-    min-height: 100vh; /* Set a minimum height for the container */
+    height: 100vh; /* Set a minimum height for the container */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     padding: 0;
     margin: 0;
+    margin-bottom: 0px;
   }
   .container2 {
     height: 100%; /* Match the container height */
     overflow: hidden; /* Prevent scrolling */
+    flex: 1;
   }
   .card {
     background-color: #ffffff;
@@ -52,16 +55,6 @@ body {
     border-left: 1px solid #eaeaea;
   }
  
-
-
-
-
-
-
-
-
-
-
   .people-list {
     height: 100%; /* Match the height of the parent container */
     overflow-y: auto; /* Allow it to scroll if needed */
