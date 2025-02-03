@@ -13,7 +13,7 @@
     </button>
     <button routerLink="/messages" class="nav-link fw-bold mx-2">Messages</button>
     <button routerLink="/rendez-vous" class="nav-link fw-bold mx-2">Rendez-vous</button>
-    
+
 
     <button routerLink="/info" class="nav-link  fw-bold mx-2">Documents</button>
 
@@ -33,11 +33,12 @@
 
   <!-- Liens de navigation -->
   <nav class="d-flex align-items-center">
-    <button href="#" class="nav-link fw-bold mx-2 d-flex align-items-center">
+    <button href="#"  routerLink="/patient-profile" class="nav-link fw-bold mx-2 d-flex align-items-center">
       <i class="bi bi-translate me-1"></i> Fr
     </button>
-    <button href="#" class="btn btn-outline-light fw-bold mx-2" routerLink="/signin" >Se connecter</button>
-    <button href="#" class="btn btn-outline-light fw-bold mx-2 me-3" routerLink="/signup" >S'inscrire</button>
+
+    <button href="#" *ngIf="showButtons" class="btn btn-outline-light fw-bold mx-2" routerLink="/signin" >Se connecter</button>
+    <button href="#"  *ngIf="showButtons" class="btn btn-outline-light fw-bold mx-2 me-3" routerLink="/signup" >S'inscrire</button>
   </nav>
 </div>
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {NgIf} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {Note} from '../Modules/Note';
+import {Note} from '../../Models/Note';
 
 @Component({
   selector: 'app-notes',

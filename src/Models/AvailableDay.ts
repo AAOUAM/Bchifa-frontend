@@ -2,10 +2,10 @@ import {Docteur} from './Docteur';
 
 export class AvailableDay {
 
-  Jour!: String;
-  heure!: String[];
+  Jour!: string;
+  heure!: string[];
 
-  constructor(Jour: String, heure: String[]) {
+  constructor(Jour: string, heure: string[]) {
     this.Jour = Jour;
     this.heure = heure;
   }

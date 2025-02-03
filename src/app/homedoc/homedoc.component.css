@@ -1,0 +1,164 @@
+
+
+/*.banner {*/
+/*  background-color: #0078D7FF; !* Blue background *!*/
+/*  padding: 20px 10px; !* Balanced padding for the content *!*/
+/*  border-radius: 8px; !* Rounded corners *!*/
+/*  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); !* Subtle shadow for depth *!*/
+/*  color: white; !* Text color for better contrast *!*/
+/*  text-align: center; !* Center align content *!*/
+/*}*/
+
+/*!* Full-page Layout *!*/
+/*.container-fluid {*/
+/* !*e the container spans the viewport height *!*/
+/*  display: flex; !* Use flexbox for layout alignment *!*/
+/*  flex-direction: column; !* Stack elements vertically *!*/
+/*  justify-content: space-between; !* Space between sections *!*/
+/*}*/
+
+/*!* Row Adjustments *!*/
+/*.row {*/
+/*  margin: 0; !* Remove extra margins between rows *!*/
+/*  padding: 0; !* Remove additional padding, if any *!*/
+/*}*/
+
+/*!* Dashboard Card Styling *!*/
+/*.dashboard-card {*/
+/*  border-radius: 8px;*/
+/*  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;*/
+/*  overflow: hidden; !* Prevent content overflow *!*/
+/*}*/
+
+/*.dashboard-card:hover {*/
+/*  transform: translateY(-5px); !* Slight lift effect *!*/
+/*  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); !* Enhanced shadow on hover *!*/
+/*}*/
+
+/*.card-title {*/
+/*  font-size: 1.25rem; !* Slightly larger font for titles *!*/
+/*  font-weight: bold;*/
+/*}*/
+
+/*.card-text {*/
+/*  font-size: 0.95rem; !* Standard size for description text *!*/
+/*  color: #555; !* Subtle text color *!*/
+/*}*/
+
+/*!* Button Adjustments *!*/
+/*button.btn-primary {*/
+/*  margin-top: 10px;*/
+/*  padding: 10px 20px;*/
+/*  font-size: 1rem;*/
+/*}*/
+
+/*!* Call-to-Action Section Styling *!*/
+/*.call-to-action {*/
+/*  background-color: #ffffff; !* Light gray background *!*/
+/*  padding: 20px 10px; !* Comfortable padding *!*/
+/*  text-align: center; !* Centered content *!*/
+/*  margin-top: 20px; !* Adjust spacing from previous section *!*/
+/*}*/
+
+/*.call-to-action h2 {*/
+/*  font-size: 1.75rem;*/
+/*  font-weight: bold;*/
+/*  color: #ffffff; !* Darker color for better contrast *!*/
+/*}*/
+
+/*.call-to-action p {*/
+/*  font-size: 1rem;*/
+/*  color: #ffffff; !* Subtle gray text *!*/
+/*}*/
+
+/*.call-to-action .btn-success {*/
+/*  font-size: 1.1rem;*/
+/*  padding: 10px 30px;*/
+/*}*/
+
+/* Banner Styling */
+
+.banner {
+  background-color: #0078D7; /* Blue background */
+  padding: 20px 10px; /* Balanced padding for the content */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  color: white; /* Text color for better contrast */
+  text-align: center; /* Center align content */
+}
+
+
+
+/* Full-page Layout */
+.container-fluid {
+  min-height: 40vh; /* Ensure the container spans the viewport height */
+  display: flex; /* Use flexbox for layout alignment */
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: space-between; /* Space between sections */
+}
+
+/* Row Adjustments */
+.row {
+  margin: 0; /* Remove extra margins between rows */
+  padding: 0; /* Remove additional padding, if any */
+}
+
+/* Dashboard Card Styling */
+.dashboard-card {
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  overflow: hidden; /* Prevent content overflow */
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px); /* Slight lift effect */
+  /* Enhanced shadow on hover */
+}
+
+.card-title {
+  font-size: 1.25rem; /* Slightly larger font for titles */
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 0.95rem; /* Standard size for description text */
+  color: #555; /* Subtle text color */
+}
+
+/* Button Adjustments */
+button.btn-primary {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+
+/* Call-to-Action Section Styling */
+.call-to-action {
+  background-color: #0078D7; /* Match the banner's blue for consistency */
+  padding: 20px 10px; /* Comfortable padding */
+  text-align: center; /* Centered content */
+  margin-top: 20px; /* Adjust spacing from the previous section */
+  border-radius: 8px; /* Match other rounded elements */
+  color: white; /* Text color for better visibility */
+}
+
+.call-to-action h2 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #fff; /* White for better contrast */
+}
+
+.call-to-action p {
+  font-size: 1rem;
+  color: #f0f0f0; /* Lighter gray for contrast */
+}
+
+.call-to-action .btn-success {
+  font-size: 1.1rem;
+  padding: 10px 30px;
+  background-color: #28a745; /* Green background for success */
+  border: none;
+  color: #fff; /* White text */
+  border-radius: 5px; /* Rounded button */
+}
+
+
