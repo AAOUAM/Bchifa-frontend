@@ -32,6 +32,7 @@
               </div>
             </li>
           </ul>
+          <button class="btn btn-primary mt-2" (click)="openAddPersonModal()">Add New Person</button>
         </div>
         <!-- chat -->
         <div class="chat">
@@ -74,6 +75,22 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+
+
+<div *ngIf="showAddPersonModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Add New Person</h3>
+    <form (ngSubmit)="onAddPerson()">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input id="name" [(ngModel)]="newPerson.name" name="name" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Add</button>
+      <button type="button" class="btn btn-secondary" (click)="closeAddPersonModal()">Cancel</button>
+    </form>
   </div>
 </div>
 

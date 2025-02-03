@@ -13,9 +13,14 @@ import { MessageChat } from './chatmessage';
 })
 export class MessageComponent implements AfterViewInit {
 
+  constructor(private messageService: MessageService, private MessageChat: MessageChat) {}
+  showAddPersonModal: boolean = false; 
   newMessage: string = '';  
   selectedPerson: { id: string, name: string, avatar: string, status: string, lastSeen: string } | null = null;
   currentTime: string = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+
+
 
   chatHistories: { [key: string]: { messages: { content: string, sender: string, reciever: string, timestamp: string }[] } } = {
     vincent: {
@@ -31,7 +36,6 @@ export class MessageComponent implements AfterViewInit {
       ]
     },
   };
-
   peopleList = [
     {
       id: 'vincent',
@@ -76,8 +80,83 @@ export class MessageComponent implements AfterViewInit {
     } 
   ];
 
-  constructor(private messageService: MessageService, private MessageChat: MessageChat) {}
 
+
+
+
+  newPerson: { name: string, avatar: string, status: string, lastSeen: string } = {
+    name: '',
+    avatar: '',
+    status: '',
+    lastSeen: ''
+  };
+  openAddPersonModal(): void {
+    this.showAddPersonModal = true;
+  }
+  closeAddPersonModal(): void {
+    this.showAddPersonModal = false;
+    this.newPerson = { name: '', avatar: '', status: '', lastSeen: '' }; // Reset the form
+  }
+ 
+  onAddPerson(): void {
+    // Fetch the person by name from the database
+    this.messageService.getPersonneByName(this.newPerson.name).subscribe(
+      (existingPerson) => {
+        // If the person exists, add them to the peopleList
+        const personExists = this.peopleList.some(person => person.id === existingPerson.id);
+  
+        if (!personExists) {
+          this.peopleList.push({
+            id: existingPerson.id,
+            name: existingPerson.name,
+            avatar: existingPerson.avatar,
+            status: existingPerson.status,
+            lastSeen: existingPerson.lastSeen
+          });
+  
+          // Optionally, initialize an empty chat history for the new person
+          this.chatHistories[existingPerson.id] = { messages: [] };
+  
+          console.log('Person added to chat list:', existingPerson.name);
+          this.closeAddPersonModal(); // Close the modal after adding
+        } else {
+          console.log('Person is already in the chat list:', existingPerson.name);
+          alert('This person is already in your chat list!');
+        }
+      },
+      (error) => {
+        // If the person doesn't exist, show an error message
+        if (error.status === 404) {
+          console.error('Person not found in the database:', this.newPerson.name);
+          alert('Person not found in the database!');
+        } else {
+          console.error('Error fetching person by name:', error);
+        }
+      }
+    );
+  }
+  addPerson(id: string, name: string, avatar: string, status: string, lastSeen: string): void {
+    
+    const personExists = this.peopleList.some(person => person.id === id);
+  
+    if (!personExists) {
+      // Add the new person to the peopleList
+      this.peopleList.push({
+        id: id,
+        name: name,
+        avatar: avatar,
+        status: status,
+        lastSeen: lastSeen
+      });
+  
+      // Optionally, initialize an empty chat history for the new person
+      this.chatHistories[id] = { messages: [] };
+  
+      console.log(`New person added: ${name}`);
+    } else {
+      console.log(`Person with id ${id} already exists.`);
+    }
+  }
   selectPerson(person: { id: string, name: string, avatar: string, status: string, lastSeen: string }) {
     this.selectedPerson = person; // Set the currently selected person
   
@@ -94,12 +173,27 @@ export class MessageComponent implements AfterViewInit {
       };
     });
   }
+  toggleSearch() {
+    const inputGroup = document.querySelector('.input-group');
+    const inputField = document.querySelector('.input-group .form-control') as HTMLInputElement;
+
+    if (inputGroup && inputField) {
+      inputGroup.classList.toggle('expanded');
+      if (inputGroup.classList.contains('expanded')) {
+        inputField.focus();
+      }
+    }
+  }
+
+
+
+
+
 
   ngAfterViewInit(): void {
     const chatHistory = document.querySelector('.chat-history');
     chatHistory?.scrollTo(0, chatHistory.scrollHeight);
   }
-
   sendMessage(): void {
     if (this.newMessage.trim() && this.selectedPerson) {
       const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -133,15 +227,9 @@ export class MessageComponent implements AfterViewInit {
     }
   }
 
-  toggleSearch() {
-    const inputGroup = document.querySelector('.input-group');
-    const inputField = document.querySelector('.input-group .form-control') as HTMLInputElement;
 
-    if (inputGroup && inputField) {
-      inputGroup.classList.toggle('expanded');
-      if (inputGroup.classList.contains('expanded')) {
-        inputField.focus();
-      }
-    }
-  }
+
+
+
+
 }

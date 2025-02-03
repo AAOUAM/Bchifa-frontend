@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 
 export class MessageService {
-  private apiUrl = 'http://localhost:8082/api/messages'; // Update with your backend URL
+  private apiUrl = 'http://localhost:8082/api/messages'; 
+  private perUrl = 'http://localhost:8082/api/personne'; 
 
   constructor(private http: HttpClient) {}
 
@@ -17,5 +18,14 @@ export class MessageService {
 
   sendMessage(message: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, message);
+  }
+  getPersonneById(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.perUrl}/id/${id}`);
+  }
+  getPersonneByName(name: string): Observable<any> {
+    return this.http.get<any>(`${this.perUrl}/name/${name}`);
+  }
+  addPerson(person: any): Observable<any> {
+    return this.http.post<any>(`${this.perUrl}/personne`, person);
   }
 }
