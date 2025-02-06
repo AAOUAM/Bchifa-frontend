@@ -97,7 +97,7 @@
 
 
         <button (click)="previousStep()">Étape précédente</button>
-        <button (click)="nextStep()" [disabled]="patientForm.invalid">Continuer</button>
+        <button (click)="signUpPatient()" [disabled]="patientForm.invalid">Continuer</button>
       </div>
 
 
@@ -207,7 +207,7 @@
 
 
         <button
-          (click)="nextStepDoc()"
+          (click)="nextStep()"
           [disabled]="
         doctorForm.get('INPE')?.invalid ||
         doctorForm.get('nom')?.invalid ||
@@ -243,7 +243,7 @@
         </div>
 
         <button (click)="previousStep()">Étape précédente</button>
-        <button (click)="nextStepDoc()" [disabled]="emailD?.invalid || telephone?.invalid" >
+        <button (click)="nextStep()" [disabled]="emailD?.invalid || telephone?.invalid" >
           Continuer
         </button>
       </div>
@@ -290,12 +290,18 @@
           </select>
 
           <label for="langue">Langue</label>
-          <input
+          <select
             [formControl]="Langue"
             id="langue"
             type="text"
-            placeholder="Arab"
-          />
+          >
+            <option value="Français">Français</option>
+            <option value="Arab">Arab</option>
+            <option value="English">English</option>
+            <option value="Tamazight">Tamazight</option>
+
+          </select>
+
 
           <button
             (click)="nextStep()"
@@ -334,31 +340,11 @@
         </div>
 
         <button (click)="previousStep()">Étape précédente</button>
-        <button (click)="nextStep()"  [disabled]="doctorForm.controls['description'].invalid || doctorForm.controls['specialite'].invalid"> Continuer </button>
+        <button (click)="signUpDoctor()"  [disabled]="doctorForm.controls['description'].invalid || doctorForm.controls['specialite'].invalid"> Submit </button>
       </div>
 
 
       <div *ngIf="step === 5" class="center-content">
-        <input
-          type="file"
-          (change)="onFileSelected($event)"
-          [ngClass]="{ 'is-invalid': !selectedFile && fileTouched }"
-        />
-        <div *ngIf="!selectedFile && fileTouched" class="error">
-          Veuillez sélectionner une image de profil valide.
-        </div>
-        <div *ngIf="previewUrl" class="preview-container">
-          <img  style="max-height: 100px ; max-width: max-content ; border-radius: 10px "  [src]="previewUrl" alt="Prévisualisation de l'image" />
-        </div>
-        <button (click)="previousStep()">Étape précédente</button>
-        <button (click)="nextStep()" [disabled]="!selectedFile">Continuer</button>
-      </div>
-
-
-
-
-
-      <div *ngIf="step === 6" class="center-content">
 
         <h2>Inscription réussie !</h2>
         <p>Vous êtes maintenant enregistré avec succès. Vous pouvez vous connecter.</p>

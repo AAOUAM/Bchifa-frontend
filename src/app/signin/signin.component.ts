@@ -5,6 +5,7 @@ import {FormGroup} from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import {NgClass, NgIf} from '@angular/common';
 import {AuthService} from '../Services/auth.service';
+import {TypeuserService} from '../Services/typeuser.service';
 
 
 
@@ -20,14 +21,17 @@ import {AuthService} from '../Services/auth.service';
 export class SigninComponent implements OnInit {
 
   signinForm: FormGroup;
+  userRole: 'doctor' | 'patient' | null = null;
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {}
+
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private typeUser : TypeuserService) {}
 
   ngOnInit(): void {
     this.signinForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
+    this.userRole = this.typeUser.getUserRole();
   }
 
   // Getter methods for form controls
@@ -39,17 +43,42 @@ export class SigninComponent implements OnInit {
     return this.signinForm.get('password');
   }
 
-  // Handle form submission
-  onSubmit(): void {
-    if (this.signinForm.valid) {
-      const formData = this.signinForm.value;
-      console.log('Form Data: ', formData);
-      // You can add logic to send the login request to the backend
-      // alot of logic hhhhhhhhhh
-      this.authService.login(formData.email, 'MockUser');
 
-      // Redirect to a different page after successful login (e.g., dashboard)
-      this.router.navigateByUrl('');
+  login(): void {
+
+    if(this.userRole == 'patient') {
+      if (this.signinForm.valid) {
+        const formData = this.signinForm.value;
+        this.authService.loginPatient(formData.email, formData.password).subscribe(
+          (response) => {
+            if(response.token != null){
+              this.router.navigateByUrl('/homepatient');
+              console.log("Signed In successfully Patient");
+            }
+            else {
+              console.log("error");
+            }
+          }
+        )
+      }
+    }
+
+    else if (this.userRole == 'doctor') {
+      if (this.signinForm.valid) {
+        const formData = this.signinForm.value;
+        this.authService.loginDoctor(formData.email, formData.password).subscribe(
+          (response) => {
+            if(response.token != null){
+              this.router.navigateByUrl('/homedocteur');
+              console.log(response.token);
+              console.log("Signed In successfully Doctor ");
+            }
+            else {
+              console.log("error");
+            }
+          }
+        )
+      }
     }
   }
 

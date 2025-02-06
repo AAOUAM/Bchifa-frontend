@@ -19,24 +19,27 @@ import {NavbarStateService} from '../shared/navbar-state.service';
 export class NavbarComponent implements OnInit {
   isUserAuthenticated: boolean = false;
   userEmail: string | null = null;
-  constructor(private router: Router, private authService: AuthService, private userTypeService: TypeuserService ,private navbarStateService: NavbarStateService ) {
-
-
-  }
-
   showButtons: boolean = true;
   patient = false;
 
 
 
+  constructor(private router: Router, private authService: AuthService, private userTypeService: TypeuserService ,private navbarStateService: NavbarStateService ) {
+
+
+  }
+
+
+
+
+
 
   ngOnInit(): void {
-
-
+    // Subscribe to navbar state for showing/hiding buttons
     this.navbarStateService.showButtons$.subscribe((state) => {
       this.showButtons = state;
     });
-    // Simulate authentication subscription
+
     this.authService.user$.subscribe((user) => {
       if (user) {
         this.isUserAuthenticated = true;
@@ -46,23 +49,12 @@ export class NavbarComponent implements OnInit {
         this.userEmail = null;
       }
     });
-
-
   }
 
-
-  login() {
-    this.router.navigateByUrl('/signin');
-  }
-
-  /*
-  logout() {
+  logout(): void {
     this.authService.logout();
     this.router.navigateByUrl('/');
   }
-
-   */
-
 
 
 
