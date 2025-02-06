@@ -1,8 +1,9 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MessageService } from './messagesevice'; 
-import { MessageChat } from './chatmessage'; 
+import { MessageService } from './messagesevice';
+import { MessageChat } from './chatmessage';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-message',
@@ -13,9 +14,9 @@ import { MessageChat } from './chatmessage';
 })
 export class MessageComponent implements AfterViewInit {
 
-  constructor(private messageService: MessageService, private MessageChat: MessageChat) {}
-  showAddPersonModal: boolean = false; 
-  newMessage: string = '';  
+  constructor(private messageService: MessageService, private MessageChat: MessageChat, private router: Router) { }
+  showAddPersonModal: boolean = false;
+  newMessage: string = '';
   selectedPerson: { id: string, name: string, avatar: string, status: string, lastSeen: string } | null = null;
   currentTime: string = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
@@ -39,45 +40,25 @@ export class MessageComponent implements AfterViewInit {
   peopleList = [
     {
       id: 'vincent',
-      name: 'Vincent Porter',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
+      name: 'Dr Faical Tahiri',
+      avatar: 'https://imagecdn.med.ovh/unsafe/130x130/filters:format(webp):quality(100):blur(0)/https://www.med.tn/uploads/offices/thumbnail/207514-dr-faycal-tahiri-1657024314_3208.jpeg',
       status: 'offline',
       lastSeen: 'left 7 mins ago'
     },
     {
       id: 'aiden3',
-      name: 'Aiden Chavez',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
+      name: 'Dr Mohammed HATIM ',
+      avatar: 'https://imagecdn.med.ovh/unsafe/130x130/filters:format(webp):quality(100):blur(0)/https://www.med.tn/uploads/offices/thumbnail/43412-dr-mohammed-hatim-1712250465.jpg',
       status: 'online',
       lastSeen: 'online'
     },
-    {
-      id: 'mike3',
-      name: 'Mike Thomas',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar3.png',
-      status: 'online',
-      lastSeen: 'online'
-    }, {
+   {
       id: 'vincent4',
-      name: 'cooper Porter',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar1.png',
+      name: 'Dr Najlaa MAHMOUDI ',
+      avatar: 'https://imagecdn.med.ovh/unsafe/130x130/filters:format(webp):quality(100):blur(0)/https://www.med.tn/uploads/offices/thumbnail/209100-dr-najlaa-mahmoudi-1686592292_5148.jpg',
       status: 'offline',
       lastSeen: 'left 7 mins ago'
-    },
-    {
-      id: 'aiden4',
-      name: 'Aiden alavez',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-      status: 'online',
-      lastSeen: 'online'
-    },
-    {
-      id: 'mike4',
-      name: 'Mike santos',
-      avatar: 'https://bootdey.com/img/Content/avatar/avatar3.png',
-      status: 'online',
-      lastSeen: 'online'
-    } 
+    }
   ];
 
 
@@ -97,14 +78,14 @@ export class MessageComponent implements AfterViewInit {
     this.showAddPersonModal = false;
     this.newPerson = { name: '', avatar: '', status: '', lastSeen: '' }; // Reset the form
   }
- 
+
   onAddPerson(): void {
     // Fetch the person by name from the database
     this.messageService.getPersonneByName(this.newPerson.name).subscribe(
       (existingPerson) => {
         // If the person exists, add them to the peopleList
         const personExists = this.peopleList.some(person => person.id === existingPerson.id);
-  
+
         if (!personExists) {
           this.peopleList.push({
             id: existingPerson.id,
@@ -113,10 +94,10 @@ export class MessageComponent implements AfterViewInit {
             status: existingPerson.status,
             lastSeen: existingPerson.lastSeen
           });
-  
+
           // Optionally, initialize an empty chat history for the new person
           this.chatHistories[existingPerson.id] = { messages: [] };
-  
+
           console.log('Person added to chat list:', existingPerson.name);
           this.closeAddPersonModal(); // Close the modal after adding
         } else {
@@ -136,9 +117,9 @@ export class MessageComponent implements AfterViewInit {
     );
   }
   addPerson(id: string, name: string, avatar: string, status: string, lastSeen: string): void {
-    
+
     const personExists = this.peopleList.some(person => person.id === id);
-  
+
     if (!personExists) {
       // Add the new person to the peopleList
       this.peopleList.push({
@@ -148,10 +129,10 @@ export class MessageComponent implements AfterViewInit {
         status: status,
         lastSeen: lastSeen
       });
-  
+
       // Optionally, initialize an empty chat history for the new person
       this.chatHistories[id] = { messages: [] };
-  
+
       console.log(`New person added: ${name}`);
     } else {
       console.log(`Person with id ${id} already exists.`);
@@ -159,7 +140,7 @@ export class MessageComponent implements AfterViewInit {
   }
   selectPerson(person: { id: string, name: string, avatar: string, status: string, lastSeen: string }) {
     this.selectedPerson = person; // Set the currently selected person
-  
+
     // Fetch chat history for the selected person
     this.messageService.getMessages(person.id).subscribe((messages) => {
       // Map the messages into the desired format
@@ -200,8 +181,8 @@ export class MessageComponent implements AfterViewInit {
 
       const message = {
         content: this.newMessage,
-        sender: 'me', 
-        receiver: this.selectedPerson.id, 
+        sender: 'me',
+        receiver: this.selectedPerson.id,
         time: currentTime
       };
 
@@ -226,6 +207,12 @@ export class MessageComponent implements AfterViewInit {
       });
     }
   }
+
+  appeler(): void {
+    this.router.navigateByUrl('/video') ;
+  }
+
+
 
 
 

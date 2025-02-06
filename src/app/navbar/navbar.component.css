@@ -39,3 +39,8 @@
   font-size: large;
 }
 
+.navbar-logo {
+  max-height: 70px; /* Adjust the max-height as needed */
+}
+
+
