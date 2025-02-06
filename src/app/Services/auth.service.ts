@@ -39,6 +39,7 @@ export class AuthService {private userSubject = new BehaviorSubject<User | null>
     email: string,
     password: string,
     gender: string,
+    role: string,
     dateOfBirth: string ): Observable<void> {
     const payload = {
       firstName,
@@ -46,7 +47,10 @@ export class AuthService {private userSubject = new BehaviorSubject<User | null>
       email,
       password,
       gender,
-      dateOfBirth, };
+      dateOfBirth,
+      role
+
+    };
 
     return this.http.post<void>(`${this.apiPatientUrl}/register`, payload).pipe(
       tap(() => console.log('Patient registered successfully')) // Debug log
@@ -76,7 +80,10 @@ export class AuthService {private userSubject = new BehaviorSubject<User | null>
     telephone: string,
     langue: string,
     genreConsultation: string,
-    prixConsultation: string
+    prixConsultation: string,
+    role :  string,
+    latitude : number ,
+    longitude : number ,
   ): Observable<void> {
     const payload = {
       firstname,
@@ -90,6 +97,9 @@ export class AuthService {private userSubject = new BehaviorSubject<User | null>
       langue,
       genreConsultation,
       prixConsultation,
+      role,
+      latitude,
+      longitude,
     };
 
     return this.http.post<void>(`${this.apiDoctorUrl}/register`, payload).pipe(
