@@ -12,12 +12,14 @@ import {SigninComponent} from './signin/signin.component';
 import {SignupComponent} from './signup/signup.component';
 import {MessageComponent} from './message/message.component';
 import { RendezvousComponent } from "./rendez-vous/rendez-vous.component";
+import { HttpClientModule } from '@angular/common/http';
+
 import {NavbarStateService} from './shared/navbar-state.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, FooterComponent, HomeComponent, InfoComponent, DocumentsComponent, FormsModule, VediocallComponent, ListdocteursComponent, SigninComponent, SignupComponent,MessageComponent,RendezvousComponent],
+  imports: [RouterOutlet, NavbarComponent,HttpClientModule, FooterComponent, HomeComponent, InfoComponent, DocumentsComponent, FormsModule, VediocallComponent, ListdocteursComponent, SigninComponent, SignupComponent,MessageComponent,RendezvousComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

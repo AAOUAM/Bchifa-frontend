@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Doc } from '../Modules/Doc';
+import { Doc } from '../../Models/Doc';
 import { NgForOf, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
