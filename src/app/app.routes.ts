@@ -10,6 +10,7 @@ import { MessageComponent } from './message/message.component';
 import { RendezvousComponent } from './rendez-vous/rendez-vous.component';
 import {HomeallComponent} from './homeall/homeall.component';
 import {HomedocComponent} from './homedoc/homedoc.component';
+import {VediocallComponent} from './vediocall/vediocall.component';
 
 
 export const routes: Routes = [
@@ -24,7 +25,8 @@ export const routes: Routes = [
   {path: 'signin' , component: SigninComponent }, //
   {path : 'signup', component: SignupComponent }, //
   {path : 'homepatient', component: HomeComponent },
-  {path : 'homedocteur', component: HomedocComponent }
+  {path : 'homedocteur', component: HomedocComponent },
+  {path : 'video' , component : VediocallComponent}
 
 
 

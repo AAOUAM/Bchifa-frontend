@@ -17,10 +17,10 @@
           </div>
           <!-- ppl list -->
           <ul class="list-unstyled chat-list mt-2 mb-0">
-            <li 
-              class="clearfix" 
-              *ngFor="let person of peopleList" 
-              [class.active]="selectedPerson?.id === person.id" 
+            <li
+              class="clearfix"
+              *ngFor="let person of peopleList"
+              [class.active]="selectedPerson?.id === person.id"
               (click)="selectPerson(person)">
               <img [src]="person.avatar" alt="avatar">
               <div class="about">
@@ -47,6 +47,9 @@
                   <h6 class="m-b-0">{{ selectedPerson?.name }}</h6>
                   <small>{{ selectedPerson?.status === 'online' ? 'Online' : 'Last seen: ' + selectedPerson?.lastSeen }}</small>
                 </div>
+                <button (click)="appeler()">
+                  <i class="fa-solid fa-video">  </i>
+                </button>
               </div>
             </div>
           </div>
@@ -63,7 +66,7 @@
               </li>
             </ul>
           </div>
-            <!-- dynamic messages -->        
+            <!-- dynamic messages -->
           <div class="chat-message clearfix">
             <div class="input-group mb-0">
               <div class="input-group-prepend">

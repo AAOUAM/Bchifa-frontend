@@ -13,9 +13,10 @@
     </button>
     <button routerLink="/messages" class="nav-link fw-bold mx-2">Messages</button>
     <button routerLink="/rendez-vous" class="nav-link fw-bold mx-2">Rendez-vous</button>
-
-
     <button routerLink="/info" class="nav-link  fw-bold mx-2">Documents</button>
+    <nav class="d-flex align-items-center">
+      <button (click)="logout()"  class="btn btn-outline-light fw-bold mx-2 me-3" routerLink="/" >Se Deconnecter</button>
+    </nav>
 
     <button routerLink="/patient-profile" class="nav-link  fw-bold mx-2">
       <i class="bi bi-person"></i>

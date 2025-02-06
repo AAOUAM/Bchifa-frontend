@@ -9,10 +9,10 @@ import {
   FormArray, AbstractControl, ValidationErrors
 } from '@angular/forms';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {TypeuserService} from '../Services/typeuser.service';
 import {SpecialitesMedicales} from '../../Models/SpecialitesMedicales';
-import {AvailableDay} from '../../Models/AvailableDay';
+import {AuthService} from '../Services/auth.service';
 
 
 
@@ -39,22 +39,13 @@ export class SignupComponent  implements OnInit {
     this.userRole = this.typeUserService.getUserRole();
     this.getUserLocation();
 
-
   }
 
-  onSubmit() {
-    if (this.doctorForm.valid) {
-      console.log(this.doctorForm.value);  // Process the form values here
-    } else {
-      console.log('Form is not valid');
-    }
-  }
 
   specialites  = Object.values(SpecialitesMedicales);
 
-  emailtest:String [] = ["aymanekenbouch@gmail.com","vvv@gmail.com"];
 
-  constructor(private fb: FormBuilder,private typeUserService : TypeuserService) {
+  constructor(private fb: FormBuilder,private typeUserService : TypeuserService, private authenticationService : AuthService, private router: Router) {
     this.patientForm = this.fb.group({
         emailP: ['', [Validators.required, Validators.email]],
         gender: ['', Validators.required],
@@ -73,12 +64,11 @@ export class SignupComponent  implements OnInit {
         lastName: ['', [Validators.required, Validators.minLength(2)]],
         birthDate: ['', [Validators.required, this.validateBirthDate]]
       },
-
       {
         validators: this.passwordMatchValidatorP,
       }
-
     );
+
 
 
     this.doctorForm = this.fb.group({
@@ -90,7 +80,7 @@ export class SignupComponent  implements OnInit {
           '',
           [
             Validators.required,
-            Validators.minLength(8), // Minimum length of 8 characters
+            Validators.minLength(8),
             Validators.pattern(
               /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
             ),
@@ -101,11 +91,6 @@ export class SignupComponent  implements OnInit {
         specialite: ['', Validators.required],
         telephone: ['', [Validators.required, Validators.pattern(/^\+?\d{10,15}$/)]],
         emailD: ['', [Validators.required, Validators.email]],
-        image: [''],
-        Adresse: ['', Validators.required],
-        availableDays: [[], Validators.required],
-        latitude: ['', Validators.required],
-        longitude: ['', Validators.required],
         prixConsultation: ['', [Validators.required, Validators.min(0)]],
         GenreConsultation: ['', Validators.required],
         Langue: ['', Validators.required],
@@ -132,36 +117,148 @@ export class SignupComponent  implements OnInit {
   }
 
 
+  signUpPatient(): void {
+    if (this.patientForm.valid) {
 
-  getUserLocation(): void {
-    if (this.userRole=='doctor'){
-      alert("Vous etes dans votre cabinet de travail ? si oui accepter ")
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
+      const patientData = this.patientForm.value;
 
-            // Get the latitude and longitude
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
+      const requestPayload = {
+        firstName: patientData.firstName,
+        lastName: patientData.lastName,
+        email: patientData.emailP, // Assuming emailP is the field in the form
+        password: patientData.passWordP, // Assuming passWordP is the field in the form
+        gender: patientData.gender,
+        dateOfBirth: patientData.birthDate ,
+        role: "PATIENT"
+      };
 
-            // Log the coordinates to the console
-            console.log('Latitude: ', lat);
-            console.log('Longitude: ', lng);
-
-            // You can use these values as needed in your app
-          },
-          (error) => {
-            console.error('Error getting location:', error);
+      console.log('Request Payload:', requestPayload);
+      this.authenticationService.registerPatient(requestPayload.firstName,requestPayload.lastName,requestPayload.email,requestPayload.password,requestPayload.gender,requestPayload.dateOfBirth,requestPayload.role).subscribe(
+        (response : any) => {
+          if (response.token != null) {
+            this.step = this.step +1 ;
+            this.router.navigateByUrl('/signin');
           }
-        );
-      } else {
-        console.error('Geolocation is not supported by this browser.');
-      }
+          else {
+            alert(response.msg);
+          }
+        }
+      )
     }
   }
 
 
 
+  signUpDoctor(): void {
+    if (this.doctorForm.valid) {
+
+      const doctorData = this.doctorForm.value;
+      console.log('doctorform ', doctorData);
+
+
+      const requestPayload = {
+        firstname: doctorData.prenom,
+        lastname: doctorData.nom,
+        email: doctorData.emailD,
+        password: doctorData.passWordD,
+        inpe: doctorData.INPE,
+        description: doctorData.description,
+        specialty: doctorData.specialite,
+        telephone: doctorData.telephone,
+        langue: doctorData.Langue,
+        genreConsultation: doctorData.GenreConsultation,
+        prixConsultation: doctorData.prixConsultation,
+        role : "DOCTOR",
+        latitude : this.lat,
+        longitude : this.lng
+
+      };
+
+      this.authenticationService.registerDoctor(
+        requestPayload.firstname,
+        requestPayload.lastname,
+        requestPayload.email,
+        requestPayload.password,
+        requestPayload.inpe,
+        requestPayload.description,
+        requestPayload.specialty,
+        requestPayload.telephone,
+        requestPayload.langue,
+        requestPayload.genreConsultation,
+        requestPayload.prixConsultation,
+        requestPayload.role,
+        requestPayload.latitude,
+        requestPayload.longitude,
+      ).subscribe(
+        (response: any) => {
+          if (response.token != null) {
+            this.step = this.step + 1;
+            this.router.navigateByUrl('/signin');
+          } else {
+            alert(response.msg);
+          }
+        }
+      );
+    } else {
+      console.log('Invalid form data:', this.doctorForm.errors);
+      alert('Please fill in all required fields.');
+    }
+  }
+
+
+
+
+  lat = 0;
+  lng = 0;
+
+
+  getUserLocation(): void {
+    if (this.userRole === 'doctor') {
+      alert('Vous êtes dans votre cabinet de travail ?');
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            // Get latitude and longitude
+            this.lat = position.coords.latitude;
+            this.lng = position.coords.longitude;
+
+            console.log('Latitude: ', this.lat);
+            console.log('Longitude: ', this.lng);
+
+            // Additional logic (e.g., save location or update UI)
+          },
+          (error) => {
+            // Handle errors
+            switch (error.code) {
+              case error.PERMISSION_DENIED:
+                console.error('Permission denied. Please enable location access.');
+                alert('Please enable location access.');
+                break;
+              case error.POSITION_UNAVAILABLE:
+                console.error('Position unavailable. Try again later.');
+                alert('Position unavailable. Try again later.');
+                break;
+              case error.TIMEOUT:
+                console.error('Request timed out. Check your internet connection.');
+                alert('Request timed out. Check your internet connection.');
+                break;
+              default:
+                console.error('Unknown error:', error.message);
+                alert('An unknown error occurred. Please try again.');
+            }
+          },
+          {
+            enableHighAccuracy: true, // Use GPS if available
+            timeout: 10000,          // Wait 10 seconds for response
+            maximumAge: 0,           // Do not use cached position
+          }
+        );
+      } else {
+        console.error('Geolocation is not supported by this browser.');
+        alert('Your browser does not support geolocation.');
+      }
+    }
+  }
 
 
 
@@ -207,9 +304,6 @@ export class SignupComponent  implements OnInit {
     return this.patientForm.get('confirmPasswordP') as FormControl;
   }
 
-
-
-
   get gender(): FormControl {
     return this.patientForm.get('gender') as FormControl;
   }
@@ -225,8 +319,6 @@ export class SignupComponent  implements OnInit {
   get birthDate(): FormControl {
     return this.patientForm.get('birthDate') as FormControl;
   }
-
-
 
   get INPE() {
     return this.doctorForm.get('INPE') as FormControl;
@@ -257,13 +349,6 @@ export class SignupComponent  implements OnInit {
     return this.doctorForm.get('emailD') as FormControl;
   }
 
-  get image() {
-    return this.doctorForm.get('image') as FormControl;
-  }
-
-  get Adresse() {
-    return this.doctorForm.get('Adresse') as FormControl;
-  }
 
   get availableDays(): FormArray {
     return this.doctorForm.get('availableDays') as FormArray;
@@ -275,8 +360,6 @@ export class SignupComponent  implements OnInit {
   get longitude() {
     return this.doctorForm.get('longitude') as FormControl;
   }
-
-
 
   get prixConsultation() {
     return this.doctorForm.get('prixConsultation') as FormControl;
@@ -290,42 +373,14 @@ export class SignupComponent  implements OnInit {
     return this.doctorForm.get('Langue') as FormControl;
   }
 
-
-  submitForm() {
-    if (this.doctorForm.valid) {
-      alert('Docteur enregistré avec succès !');
-
-      console.log("nicoo")
-
-    } else {
-      alert('Veuillez compléter toutes les étapes du formulaire.');
-    }
-  }
-
-
-
-
-
-
-
   nextStep(): void {
     if (this.userRole=='patient') {
       if (this.step === 1 && this.emailP.valid) {
         const enteredEmail = this.emailP.value;
-
-        // Check if email exists in the array
-        if (this.emailtest.includes(enteredEmail)) {
-          this.alertMessage = 'Cet email existe déjà chez nous !';
-          this.showAlert = true;
-          console.log(this.alertMessage);
-          return; // Prevent moving to the next step
-        }
-
-        this.step = 2; // Proceed to Step 2 if the email is valid and doesn't exist already
+        this.step = 2;
       }
       else if (this.step === 2 && this.patientForm.valid) {
-        // If form is valid, proceed to Step 3 (success message)
-        this.step = 3;
+         this.step = 3;
       }
       else {
         // Optionally, handle the case where the form is invalid on Step 2
@@ -334,7 +389,6 @@ export class SignupComponent  implements OnInit {
     }else {
       if(this.step == 4){
         if (this.doctorForm.valid) {
-          this.submitForm();
           this.step = this.step+1;
         }
       }
@@ -343,20 +397,6 @@ export class SignupComponent  implements OnInit {
   }
 
 
-
-
-  nextStepDoc(): void {
-    if (this.step === 1 ) {
-      this.step = 2; // Proceed to Step 2 if the email is valid and doesn't exist already
-    }
-    else if (this.step === 2 ) {
-      this.step = 3;
-    }
-    else {
-      alert('Veuillez remplir correctement tous les champs.');
-    }
-
-  }
 
 
   previousStep(): void {
@@ -369,31 +409,11 @@ export class SignupComponent  implements OnInit {
     this.showAlert = false;
   }
 
-  connect(): void {
-    alert('Redirection vers la page de connexion'); // Vous pouvez ajouter une navigation ici
-  }
 
 
-  selectedFile : File | null = null; // Fichier sélectionné
-  previewUrl: string | ArrayBuffer | null = null; // URL de prévisualisation
-  fileTouched: boolean = false; // Indicateur si le fichier a été touché
 
-  // Méthode pour gérer la sélection de fichier
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.fileTouched = true;
 
-    if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
 
-      // Générer une URL de prévisualisation
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.previewUrl = reader.result;
-      };
-      reader.readAsDataURL(this.selectedFile);
-    }
-  }
 
 
 }
