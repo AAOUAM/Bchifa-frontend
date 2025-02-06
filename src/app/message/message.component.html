@@ -46,16 +46,16 @@
                 <div class="chat-about">
                   <h6 class="m-b-0">{{ selectedPerson?.name }}</h6>
                   <small>{{ selectedPerson?.status === 'online' ? 'Online' : 'Last seen: ' + selectedPerson?.lastSeen }}</small>
-                </div>
-                <button (click)="appeler()">
-                  <i class="fa-solid fa-video">  </i>
+                </div >
+                <button class="okok" (click)="appeler()">
+                  <i class="bi bi-camera-video-fill"></i>
                 </button>
               </div>
             </div>
           </div>
           <div class="chat-history">
             <ul>
-              <li *ngFor="let message of chatHistories[selectedPerson?.id]?.messages || []" 
+              <li *ngFor="let message of chatHistories[selectedPerson?.id]?.messages || []"
                   [ngClass]="{'me': message.sender === 'me', 'other': message.sender !== 'me'}">
                 <div class="message-data">
                   <span class="message-data-time">{{ message.timestamp }}</span>
